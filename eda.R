@@ -4,6 +4,7 @@ library(showtext)
 library(extrafont)
 library(ggthemes)
 library(wesanderson)
+library(RColorBrewer)
 library(ggrepel)
 library(patchwork)
 
@@ -77,6 +78,73 @@ macaroni %>%
   theme_classic() +
   ggtitle("Top 10 Most Frequently Used Non-Stop Words",
           subtitle = "Mac Miller Discography 2010–2020 ") +
+  theme(text = element_text(family = "Inconsolata"),
+        axis.text.y = element_blank(),
+        axis.title = element_blank(),
+        legend.position = "none",
+        plot.title = element_text(family = "Royal Acid", size = 20, hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5))
+
+# macaroni subsets by album
+macaroni %>% 
+  filter(album == "circles") %>% 
+  anti_join(stop_words) %>% 
+  count(word, sort = TRUE) %>% 
+  top_n(5) %>% 
+  ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
+  geom_col() +
+  geom_text(aes(label = reorder(word, n)), 
+            color = "white", size = 5, family = "Inconsolata",
+            hjust = 1.5) +
+  scale_fill_brewer(palette = "Spectral") +
+  coord_flip() + # switch x and y
+  theme_classic() +
+  ggtitle("Top 5 Most Frequently Used Non-Stop Words",
+          subtitle = "Circles (2020)") +
+  theme(text = element_text(family = "Inconsolata"),
+        axis.text.y = element_blank(),
+        axis.title = element_blank(),
+        legend.position = "none",
+        plot.title = element_text(family = "Royal Acid", size = 20, hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5))
+
+macaroni %>% 
+  filter(album == "swimming") %>% 
+  anti_join(stop_words) %>% 
+  count(word, sort = TRUE) %>% 
+  top_n(5) %>% 
+  ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
+  geom_col() +
+  geom_text(aes(label = reorder(word, n)), 
+            color = "white", size = 5, family = "Inconsolata",
+            hjust = 1.5) +
+  scale_fill_brewer(palette = "Blues") +
+  coord_flip() + # switch x and y
+  theme_classic() +
+  ggtitle("Top 5 Most Frequently Used Non-Stop Words",
+          subtitle = "Swimming (2018)") +
+  theme(text = element_text(family = "Inconsolata"),
+        axis.text.y = element_blank(),
+        axis.title = element_blank(),
+        legend.position = "none",
+        plot.title = element_text(family = "Royal Acid", size = 20, hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5))
+
+macaroni %>% 
+  filter(album == "the divine feminine") %>% 
+  anti_join(stop_words) %>% 
+  count(word, sort = TRUE) %>% 
+  top_n(5) %>% 
+  ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
+  geom_col() +
+  geom_text(aes(label = reorder(word, n)), 
+            color = "white", size = 5, family = "Inconsolata",
+            hjust = 1.5) +
+  scale_fill_brewer(palette = "Reds") +
+  coord_flip() + # switch x and y
+  theme_classic() +
+  ggtitle("Top 5 Most Frequently Used Non-Stop Words",
+          subtitle = "The Divine Feminine (2016)") +
   theme(text = element_text(family = "Inconsolata"),
         axis.text.y = element_blank(),
         axis.title = element_blank(),
