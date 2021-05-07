@@ -1,0 +1,26 @@
+---
+title: "Final Project Data Memo"
+author: "Jamie Lee, Susan Tran, Grace Park"
+date: "5/7/2021"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    highlight: "tango"
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data Source
+
+For our final project, our group has decided to use data from Mac Miller's discography. We have retrieved two datasets from \_\_\_
+
+## Why this Data
+
+## Visualizing the Data
+
+## Potential Data Issues
