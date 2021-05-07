@@ -17,9 +17,23 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Data Source
 
-For our final project, our group has decided to use data from Mac Miller's discography. We have retrieved two datasets from \_\_\_
+For our final project, our group has decided to use data from Mac Miller's discography. We have retrieved two datasets from \_\_\_\_\_\_\_. One dataset consists of lyrical data from Mac Miller's songs and the other dataset contains word-by-word data.
+
+```{r}
+malcolm <- readRDS("data/processed/malcolm.rds") # lyrical data
+macaroni <- readRDS("data/processed/macaroni.rds") # word-by-word data
+
+skimr::skim_without_charts(malcolm)
+skimr::skim_without_charts(macaroni)
+```
+
+From our initial skimming of the datasets, we can see that
+
+<br>
 
 ## Why this Data
+
+As we are all fans of Mac Miller's work, our group wanted to explore
 
 ## Visualizing the Data
 
