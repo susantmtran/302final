@@ -26,7 +26,7 @@ opts_chunk$set(warning = FALSE, message = FALSE, comment = FALSE, dpi = 300)
 
 ## Source
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 library(genius)
 library(naniar)
@@ -62,7 +62,7 @@ We are fans of Mac Miller's work and have an interest in exploring his discograp
 
 ## Visualizations
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(tidytext)
 library(showtext)
 library(extrafont)
@@ -92,7 +92,7 @@ malcolm %>%
         plot.subtitle = element_text(hjust = 0.5))
 ```
 
-In this first plot, we learn that \_\_\_\_\_\_\_\_\_\_.
+In this first plot, we learn that the *Faces* album that Mac Miller released had the most amount of songs. The smallest album was *The Divine Feminine*, which has 10 songs.
 
 ```{r fig.height = 10, fig.width = 10, echo=FALSE}
 g1 <- macaroni %>% 
