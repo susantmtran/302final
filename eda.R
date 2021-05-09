@@ -3,7 +3,6 @@ library(tidytext)
 library(showtext)
 library(extrafont)
 library(ggthemes)
-library(wesanderson)
 library(RColorBrewer)
 library(ggrepel)
 library(patchwork)
@@ -11,10 +10,6 @@ library(patchwork)
 # load data
 malcolm <- readRDS("data/processed/malcolm.rds") # lyrical data
 macaroni <- readRDS("data/processed/macaroni.rds") # word-by-word data
-
-# pleasing color palettes we could maybe use idk
-# wes_palette("GrandBudapest1", n = 4) for discrete
-# wes_palette("Royal2", 100, type = "continuous") for gradients
 
 # pretty fonts
 # royal acid (the bold pretty one)
@@ -87,31 +82,10 @@ macaroni %>%
 
 # macaroni subsets by album
 macaroni %>% 
-  filter(album == "circles") %>% 
-  anti_join(stop_words) %>% 
-  count(word, sort = TRUE) %>% 
-  top_n(5) %>% 
-  ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
-  geom_col() +
-  geom_text(aes(label = reorder(word, n)), 
-            color = "white", size = 5, family = "Inconsolata",
-            hjust = 1.5) +
-  scale_fill_brewer(palette = "Spectral") +
-  coord_flip() + # switch x and y
-  theme_classic() +
-  ggtitle("Top 5 Most Frequently Used Non-Stop Words",
-          subtitle = "Circles (2020)") +
-  theme(text = element_text(family = "Inconsolata"),
-        axis.text.y = element_blank(),
-        axis.title = element_blank(),
-        legend.position = "none",
-        plot.title = element_text(family = "Royal Acid", size = 20, hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5))
-
-macaroni %>% 
   filter(album == "swimming") %>% 
   anti_join(stop_words) %>% 
   count(word, sort = TRUE) %>% 
+  filter(word != "yeah") %>%
   top_n(5) %>% 
   ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
   geom_col() +
@@ -133,7 +107,8 @@ macaroni %>%
 macaroni %>% 
   filter(album == "the divine feminine") %>% 
   anti_join(stop_words) %>% 
-  count(word, sort = TRUE) %>% 
+  count(word, sort = TRUE) %>%
+  filter(word != "yeah") %>%
   top_n(5) %>% 
   ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
   geom_col() +
