@@ -1,0 +1,51 @@
+---
+title: "Final Project Data Memo"
+author: "Jamie Lee, Susan Tran, Grace Park"
+date: "5/7/2021"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    highlight: "tango"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data Source
+
+For our final project, our group has decided to use data from Mac Miller's discography. We have retrieved two datasets from \_\_\_\_\_\_\_. One dataset consists of lyrical data from Mac Miller's songs and the other dataset contains word-by-word data.
+
+```{r}
+malcolm <- readRDS("data/processed/malcolm.rds") # lyrical data
+macaroni <- readRDS("data/processed/macaroni.rds") # word-by-word data
+
+skimr::skim_without_charts(malcolm)
+skimr::skim_without_charts(macaroni)
+```
+
+From our initial skimming of the datasets, we can see that there are no major missingness issues, although 8 values under the "lyric" variable are missing in the "malcolm" dataset and 8 values under the "word" variable are missing in the "macaroni" dataset.
+
+<br>
+
+```{r}
+malcolm %>% filter(is.na(lyric))
+macaroni %>% filter(is.na(word))
+```
+
+<br>
+
+Taking a closer look at the missingness shows that, as expected, it is of the same lines across both datasets, and it seems that a lot of this missingness is from the first line of the songs, though not all.
+
+<br>
+
+## Why This Data
+
+As we are all fans of the artist Mac Miller's work, our group was interested in exploring his discography and their song lyrics. We were inspired by the work of other data scientists who have used data of other musicians to perform text analysis and sentiment analysis followed by visualizations. As we are looking at Mac Miller's songs through a novel lens, we hope to gain interesting insights from our results.
+
+## Visualizing the Data
+
+## Potential Data Issues
