@@ -2,7 +2,7 @@
 title: "Data Visualization Memo"
 author: "Jamie Lee, Grace Park, Susan Tran"
 date: "May 9th, 2021"
-output: s
+output:
   html_document:
     toc: true
     toc_float: true
@@ -12,22 +12,138 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{=html}
+<style type="text/css">
+  body{
+  font-family: "Inconsolata";
+}
+</style>
+```
+```{r global_options, include=FALSE}
+library(knitr)
+opts_chunk$set(warning = FALSE, message = FALSE, comment = FALSE, dpi = 300)
 ```
 
-## Data Source
+## Source
 
-For our final project, our group has decided to use data from Mac Miller's discography. We have retrieved two datasets from \_\_\_\_\_\_\_. One dataset consists of lyrical data from Mac Miller's songs and the other dataset contains word-by-word data.
+```{r}
+library(tidyverse)
+library(genius)
+library(naniar)
+```
 
-From our initial skimming of the datasets, we can see that there are no major missingness issues, although 8 values under the "lyric" variable are missing in the "malcolm" dataset and 8 values under the "word" variable are missing in the "macaroni" dataset.
+Collecting and cleaning the data for our project required the three packages displayed above. Using [Josiah Parry's `genius` package](https://github.com/JosiahParry/genius) and the resources provided on his Github, we pulled lyrical data for six projects/albums by late musical artist Mac Miller: Circles, Swimming, The Divine Feminine, Faces, Macadelic, and K.I.D.S.
 
-Taking a closer look at the missingness shows that, as expected, it is of the same lines across both datasets, and it seems that a lot of this missingness is from the first line of the songs, though not all.
+```{r eval=FALSE}
+albums <- tribble(~artist, ~album, ~type,
+               "Mac Miller", "Circles", "album",
+               "Mac Miller", "Swimming", "album",
+               "Mac Miller", "The Divine Feminine", "album",
+               "Mac Miller", "Faces", "album",
+               "Mac Miller", "Macadelic", "album",
+               "Mac Miller", "K.I.D.S.", "album")
 
-## Why This Data
+mac <- albums %>%
+  add_genius(artist, album, type)
+```
 
-As we are all fans of the artist Mac Miller's work, our group was interested in exploring his discography and their song lyrics. We were inspired by the work of other data scientists who have used data of other musicians to perform text analysis and sentiment analysis followed by visualizations. As we are looking at Mac Miller's songs through a novel lens, we hope to gain interesting insights from our results.
+After some data wrangling and tidying, we ended up with two data frames for our visualization project. `malcolm` has 5709 observations with six variables, which are `album` (character), `track` (numeric), `line` (numeric), `lyric` (character), `song` (character), and `year` (factor). However, for ease of analysis, the lyrics are unnested into tokens in the second data frame. `macaroni` contains 46,212 observations with the same data and `word` as its sixth variable instead of `lyric`.
 
-## Visualizing the Data
+```{r}
+malcolm <- readRDS("data/processed/malcolm.rds") # lyrical data
+macaroni <- readRDS("data/processed/macaroni.rds") # word-by-word data
+```
 
-## Potential Data Issues
+Having two data frames allows versatility in analysis. By using `malcolm`, we can easily analyze the length (via number of tracks and/or lines) of Mac Miller's albums over time, while `macaroni` allows us to explore popular words and adlibs by album, year, song, etc.
+
+## Why this data?
+
+We are fans of Mac Miller's work and have an interest in exploring his discography and how his lyrics and artistry may, or may not have, transformed over time. We were inspired by the work of other data scientists who have used data of other musicians to perform text analysis and sentiment analysis followed by visualizations. For example, this project on [TowardsDataScience](https://towardsdatascience.com/how-to-analyze-emotions-and-words-of-the-lyrics-from-your-favorite-music-artist-bbca10411283) and this public [Github](https://github.com/aaumaitre/taylor_swift) repository both piqued our interests. As we are looking at Mac Miller's songs through a novel lens, we hope to gain insight into his artistry.
+
+## Visualizations
+
+```{r}
+library(tidytext)
+library(showtext)
+library(extrafont)
+library(ggthemes)
+library(RColorBrewer)
+library(ggrepel)
+library(patchwork)
+```
+
+Our preliminary visualizations required a few different additional packages, listed above.
+
+```{r echo=FALSE}
+malcolm %>%
+  filter(line == 1) %>%
+  ggplot(aes(album, fill = album)) +
+  geom_bar() +
+  geom_text(stat = "count", aes(label = ..count..),
+            size = 5, family = "Inconsolata", vjust = 2) +
+  scale_fill_brewer(palette = "Set2") +
+  theme_classic() +
+  ggtitle("Number of Songs per Album",
+          subtitle = "Mac Miller Discography 2010–2020 ") +
+  theme(text = element_text(family = "Inconsolata"),
+        axis.title = element_blank(),
+        legend.position = "none",
+        plot.title = element_text(family = "Royal Acid", size = 20, hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5))
+```
+
+In this first plot, we learn that \_\_\_\_\_\_\_\_\_\_.
+
+```{r fig.height = 10, fig.width = 10, echo=FALSE}
+g1 <- macaroni %>% 
+  count(word, sort = TRUE) %>% 
+  top_n(10) %>% 
+  ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
+  geom_col() +
+  geom_text(aes(label = reorder(word, n)), 
+            color = "white", size = 5, family = "Inconsolata",
+            hjust = 1.5) +
+  scale_fill_brewer(palette = "Spectral") +
+  coord_flip() + # switch x and y
+  theme_classic() +
+  ggtitle("Top 10 Most Frequently Used Words",
+          subtitle = "Mac Miller Discography 2010–2020 ") +
+  theme(text = element_text(family = "Inconsolata"),
+        axis.text.y = element_blank(),
+        axis.title = element_blank(),
+        legend.position = "none",
+        plot.title = element_text(family = "Royal Acid", size = 15, hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5))
+
+# most common non-stop words
+g2 <- macaroni %>%
+  anti_join(stop_words) %>% 
+  count(word, sort = TRUE) %>% 
+  top_n(10) %>% 
+  ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
+  geom_col() +
+  geom_text(aes(label = reorder(word, n)), 
+            color = "white", size = 5, family = "Inconsolata",
+            hjust = 1.5) +
+  scale_fill_brewer(palette = "Spectral") +
+  coord_flip() + # switch x and y
+  theme_classic() +
+  ggtitle("Top 10 Most Frequently Used Non-Stop Words",
+          subtitle = "Mac Miller Discography 2010–2020 ") +
+  theme(text = element_text(family = "Inconsolata"),
+        axis.text.y = element_blank(),
+        axis.title = element_blank(),
+        legend.position = "none",
+        plot.title = element_text(family = "Royal Acid", size = 15, hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5))
+
+g1 | g2
+```
+
+The two side-by-side charts share the top 10 most frequently appearing words in Mac Miller's lyrical data, divided by data that contains stop (filler) words and data that does not contain those words. From these visualizations, we learn that \_\_\_\_\_\_\_\_.
+
+## Potential Challenges
+
+While this is not necessarily a major issue, we think that it will be a challenge for us as budding data scientists to wrangle with the data appropriately, gauge which visualizations are most relevant for the story we are telling, and choosing an aesthetic (and/or aesthetics) that flows well with our narrative of data. For example, while the barplot above for "top 10 most frequently used words" is aesthetically pleasing, the data presented is not that interesting. Sure, Mac Miller does use the "I' pronoun a lot in his lyrics, but so do most other artists writing from a first-person perspective.
+
+Another potential issue with the data is the missing values,
