@@ -92,7 +92,7 @@ malcolm %>%
         plot.subtitle = element_text(hjust = 0.5))
 ```
 
-In this first plot, we learn that the *Faces* album that Mac Miller released had the most amount of songs. The smallest album was *The Divine Feminine*, which has 10 songs.
+In this first plot, we learn that the *Faces* album that Mac Miller released had the most amount of songs. The smallest album was *The Divine Feminine*, which has 10 songs. In total, Mac Miller released 94 songs in his album history.
 
 ```{r fig.height = 10, fig.width = 10, echo=FALSE}
 g1 <- macaroni %>% 
@@ -140,7 +140,7 @@ g2 <- macaroni %>%
 g1 | g2
 ```
 
-The two side-by-side charts share the top 10 most frequently appearing words in Mac Miller's lyrical data, divided by data that contains stop (filler) words and data that does not contain those words. From these visualizations, we learn that \_\_\_\_\_\_\_\_.
+The two side-by-side charts share the top 10 most frequently appearing words in Mac Miller's lyrical data, divided by data that contains stop (filler) words and data that does not contain those words. From these visualizations, we learn that "I" is Mac Miller's most frequent word throughout the lyrical data. For non-stop words, the most frequent word is "yeah."
 
 ## Potential Challenges
 
