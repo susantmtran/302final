@@ -42,9 +42,9 @@ Taking a closer look at the missingness shows that, as expected, it is of the sa
 
 <br>
 
-## Why this Data
+## Why This Data
 
-As we are all fans of Mac Miller's work, our group wanted to explore
+As we are all fans of the artist Mac Miller's work, our group was interested in exploring his discography and their song lyrics. We were inspired by the work of other data scientists who have used data of other musicians to perform text analysis and sentiment analysis followed by visualizations. As we are looking at Mac Miller's songs through a novel lens, we hope to gain interesting insights from our results.
 
 ## Visualizing the Data
 
