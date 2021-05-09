@@ -8,7 +8,7 @@ output:
     toc_float: true
     highlight: "tango"
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -27,7 +27,18 @@ skimr::skim_without_charts(malcolm)
 skimr::skim_without_charts(macaroni)
 ```
 
-From our initial skimming of the datasets, we can see that
+From our initial skimming of the datasets, we can see that there are no major missingness issues, although 8 values under the "lyric" variable are missing in the "malcolm" dataset and 8 values under the "word" variable are missing in the "macaroni" dataset.
+
+<br>
+
+```{r}
+malcolm %>% filter(is.na(lyric))
+macaroni %>% filter(is.na(word))
+```
+
+<br>
+
+Taking a closer look at the missingness shows that, as expected, it is of the same lines across both datasets, and it seems that a lot of this missingness is from the first line of the songs, though not all.
 
 <br>
 
