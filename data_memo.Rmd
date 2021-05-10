@@ -16,6 +16,7 @@ editor_options:
 <style type="text/css">
   body{
   font-family: "Inconsolata";
+  color: "black";
 }
 </style>
 ```
