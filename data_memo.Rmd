@@ -27,7 +27,7 @@ opts_chunk$set(warning = FALSE, message = FALSE, comment = FALSE, dpi = 300)
 
 ## Source
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 library(genius)
 library(naniar)
@@ -57,13 +57,13 @@ macaroni <- readRDS("data/processed/macaroni.rds") # word-by-word data
 
 Having two data frames allows versatility in analysis. By using `malcolm`, we can easily analyze the length (via number of tracks and/or lines) of Mac Miller's albums over time, while `macaroni` allows us to explore popular words and adlibs by album, year, song, etc.
 
-## Why this data?
+## Why This Data?
 
 We are fans of Mac Miller's work and have an interest in exploring his discography and how his lyrics and artistry may, or may not have, transformed over time. We were inspired by the work of other data scientists who have used data of other musicians to perform text analysis and sentiment analysis followed by visualizations. For example, this project on [TowardsDataScience](https://towardsdatascience.com/how-to-analyze-emotions-and-words-of-the-lyrics-from-your-favorite-music-artist-bbca10411283) and this public [Github](https://github.com/aaumaitre/taylor_swift) repository both piqued our interests. As we are looking at Mac Miller's songs through a novel lens, we hope to gain insight into his artistry.
 
 ## Visualizations
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(tidytext)
 library(showtext)
 library(extrafont)
@@ -75,7 +75,7 @@ library(patchwork)
 
 Our preliminary visualizations required a few different additional packages, listed above.
 
-```{r echo=FALSE}
+```{r echo=FALSE, eval=FALSE}
 malcolm %>%
   filter(line == 1) %>%
   ggplot(aes(album, fill = album)) +
@@ -93,9 +93,9 @@ malcolm %>%
         plot.subtitle = element_text(hjust = 0.5))
 ```
 
-In this first plot, we learn that \_\_\_\_\_\_\_\_\_\_.
+In this first plot, we learn that the *Faces* album that Mac Miller released had the most amount of songs. The smallest album was *The Divine Feminine*, which has 10 songs. In total, Mac Miller released 94 songs in his album history.
 
-```{r fig.height = 10, fig.width = 10, echo=FALSE}
+```{r fig.height = 10, fig.width = 10, echo=FALSE, eval=FALSE}
 g1 <- macaroni %>% 
   count(word, sort = TRUE) %>% 
   top_n(10) %>% 
@@ -141,10 +141,10 @@ g2 <- macaroni %>%
 g1 | g2
 ```
 
-The two side-by-side charts share the top 10 most frequently appearing words in Mac Miller's lyrical data, divided by data that contains stop (filler) words and data that does not contain those words. From these visualizations, we learn that \_\_\_\_\_\_\_\_.
+The two side-by-side charts share the top 10 most frequently appearing words in Mac Miller's lyrical data, divided by data that contains stop (filler) words and data that does not contain those words. From these visualizations, we learn that "I" is Mac Miller's most frequent word throughout the lyrical data. For non-stop words, the most frequent word is "yeah."
 
 ## Potential Challenges
 
 While this is not necessarily a major issue, we think that it will be a challenge for us as budding data scientists to wrangle with the data appropriately, gauge which visualizations are most relevant for the story we are telling, and choosing an aesthetic (and/or aesthetics) that flows well with our narrative of data. For example, while the barplot above for "top 10 most frequently used words" is aesthetically pleasing, the data presented is not that interesting. Sure, Mac Miller does use the "I' pronoun a lot in his lyrics, but so do most other artists writing from a first-person perspective.
 
-Another potential issue with the data is the missing values,
+Another potential issue with the data is the missing values, although we do not foresee this being a major problem given that there are only 8 in each dataset which is a small proportion of the overall data.
