@@ -37,8 +37,9 @@ malcolm %>%
         plot.title = element_text(family = "Royal Acid", size = 20, hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5))
 
-# most common words
-macaroni %>% 
+ggsave("plots/songs_per_album.png")
+
+g1 <- macaroni %>% 
   count(word, sort = TRUE) %>% 
   top_n(10) %>% 
   ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
@@ -49,17 +50,17 @@ macaroni %>%
   scale_fill_brewer(palette = "Spectral") +
   coord_flip() + # switch x and y
   theme_classic() +
-  ggtitle("Top 10 Most Frequently Used Stop Words",
+  ggtitle("Top 10 Most Frequently Used Words",
           subtitle = "Mac Miller Discography 2010–2020 ") +
   theme(text = element_text(family = "Inconsolata"),
         axis.text.y = element_blank(),
         axis.title = element_blank(),
         legend.position = "none",
-        plot.title = element_text(family = "Royal Acid", size = 20, hjust = 0.5),
+        plot.title = element_text(family = "Royal Acid", size = 10, hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5))
 
 # most common non-stop words
-macaroni %>%
+g2 <- macaroni %>%
   anti_join(stop_words) %>% 
   count(word, sort = TRUE) %>% 
   top_n(10) %>% 
@@ -77,8 +78,12 @@ macaroni %>%
         axis.text.y = element_blank(),
         axis.title = element_blank(),
         legend.position = "none",
-        plot.title = element_text(family = "Royal Acid", size = 20, hjust = 0.5),
+        plot.title = element_text(family = "Royal Acid", size = 10, hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5))
+
+g1 | g2
+
+ggsave("plots/most_common_words.png")
 
 # macaroni subsets by album
 macaroni %>% 

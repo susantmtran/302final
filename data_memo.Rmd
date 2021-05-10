@@ -15,19 +15,18 @@ editor_options:
 ```{=html}
 <style type="text/css">
   body{
-  font-family: "Inconsolata";
-  color: "black";
+  font-family: "Inconsolata Black", monospace;
 }
 </style>
 ```
 ```{r global_options, include=FALSE}
 library(knitr)
-opts_chunk$set(warning = FALSE, message = FALSE, comment = FALSE, dpi = 300)
+opts_chunk$set(warning=FALSE, message=FALSE, dpi = 300)
 ```
 
 ## Source
 
-```{r message=FALSE, warning=FALSE}
+```{r}
 library(tidyverse)
 library(genius)
 library(naniar)
@@ -48,11 +47,21 @@ mac <- albums %>%
   add_genius(artist, album, type)
 ```
 
-After some data wrangling and tidying, we ended up with two data frames for our visualization project. `malcolm` has 5709 observations with six variables, which are `album` (character), `track` (numeric), `line` (numeric), `lyric` (character), `song` (character), and `year` (factor). However, for ease of analysis, the lyrics are unnested into tokens in the second data frame. `macaroni` contains 46,212 observations with the same data and `word` as its sixth variable instead of `lyric`.
+After some data wrangling and tidying, we ended up with two data frames for our visualization project. `malcolm` has 5709 observations with six variables, which are `album` (character), `track` (numeric), `line` (numeric), `lyric` (character), `song` (character), and `year` (factor). Below is a preview of the first five rows of `malcolm`.
 
-```{r}
+```{r echo=FALSE}
 malcolm <- readRDS("data/processed/malcolm.rds") # lyrical data
 macaroni <- readRDS("data/processed/macaroni.rds") # word-by-word data
+
+malcolm %>% 
+  print(n = 5)
+```
+
+However, for ease of analysis, the lyrics are unnested into tokens in the second data frame. `macaroni` contains 46,212 observations with the same data and `word` as its sixth variable instead of `lyric`. Below is a preview of the first five rows of `macaroni`.
+
+```{r echo=FALSE}
+macaroni %>% 
+  print(n = 5)
 ```
 
 Having two data frames allows versatility in analysis. By using `malcolm`, we can easily analyze the length (via number of tracks and/or lines) of Mac Miller's albums over time, while `macaroni` allows us to explore popular words and adlibs by album, year, song, etc.
@@ -63,7 +72,7 @@ We are fans of Mac Miller's work and have an interest in exploring his discograp
 
 ## Visualizations
 
-```{r message=FALSE, warning=FALSE}
+```{r eval=FALSE}
 library(tidytext)
 library(showtext)
 library(extrafont)
@@ -73,78 +82,24 @@ library(ggrepel)
 library(patchwork)
 ```
 
-Our preliminary visualizations required a few different additional packages, listed above.
+Our preliminary visualizations required a few different additional packages, listed above. Code for the visualizations below can be viewed in the `eda.R` file.
 
-```{r echo=FALSE, eval=FALSE}
-malcolm %>%
-  filter(line == 1) %>%
-  ggplot(aes(album, fill = album)) +
-  geom_bar() +
-  geom_text(stat = "count", aes(label = ..count..),
-            size = 5, family = "Inconsolata", vjust = 2) +
-  scale_fill_brewer(palette = "Set2") +
-  theme_classic() +
-  ggtitle("Number of Songs per Album",
-          subtitle = "Mac Miller Discography 2010–2020 ") +
-  theme(text = element_text(family = "Inconsolata"),
-        axis.title = element_blank(),
-        legend.position = "none",
-        plot.title = element_text(family = "Royal Acid", size = 20, hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5))
-```
+![](plots/songs_per_album.png)
 
-In this first plot, we learn that the *Faces* album that Mac Miller released had the most amount of songs. The smallest album was *The Divine Feminine*, which has 10 songs. In total, Mac Miller released 94 songs in his album history.
+In this first plot, we learn that the *Faces* album that Mac Miller released had the most amount of songs. The smallest album was *The Divine Feminine*, which has 10 songs. In total, Mac Miller released 94 songs across six projects and albums.
 
-```{r fig.height = 10, fig.width = 10, echo=FALSE, eval=FALSE}
-g1 <- macaroni %>% 
-  count(word, sort = TRUE) %>% 
-  top_n(10) %>% 
-  ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
-  geom_col() +
-  geom_text(aes(label = reorder(word, n)), 
-            color = "white", size = 5, family = "Inconsolata",
-            hjust = 1.5) +
-  scale_fill_brewer(palette = "Spectral") +
-  coord_flip() + # switch x and y
-  theme_classic() +
-  ggtitle("Top 10 Most Frequently Used Words",
-          subtitle = "Mac Miller Discography 2010–2020 ") +
-  theme(text = element_text(family = "Inconsolata"),
-        axis.text.y = element_blank(),
-        axis.title = element_blank(),
-        legend.position = "none",
-        plot.title = element_text(family = "Royal Acid", size = 15, hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5))
+![](plots/most_common_words.png)
 
-# most common non-stop words
-g2 <- macaroni %>%
-  anti_join(stop_words) %>% 
-  count(word, sort = TRUE) %>% 
-  top_n(10) %>% 
-  ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
-  geom_col() +
-  geom_text(aes(label = reorder(word, n)), 
-            color = "white", size = 5, family = "Inconsolata",
-            hjust = 1.5) +
-  scale_fill_brewer(palette = "Spectral") +
-  coord_flip() + # switch x and y
-  theme_classic() +
-  ggtitle("Top 10 Most Frequently Used Non-Stop Words",
-          subtitle = "Mac Miller Discography 2010–2020 ") +
-  theme(text = element_text(family = "Inconsolata"),
-        axis.text.y = element_blank(),
-        axis.title = element_blank(),
-        legend.position = "none",
-        plot.title = element_text(family = "Royal Acid", size = 15, hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5))
-
-g1 | g2
-```
-
-The two side-by-side charts share the top 10 most frequently appearing words in Mac Miller's lyrical data, divided by data that contains stop (filler) words and data that does not contain those words. From these visualizations, we learn that "I" is Mac Miller's most frequent word throughout the lyrical data. For non-stop words, the most frequent word is "yeah."
+The two side-by-side charts share the top 10 most frequently appearing words in Mac Miller's lyrical data, divided by data that contains stop (filler) words and data that does not contain those words. From these visualizations, we learn that "I" is Mac Miller's most frequent word throughout the lyrical data. For non-stop (non-filler) words, the word "yeah" makes the most frequent appearances, as seen in the graph on the right.
 
 ## Potential Challenges
 
-While this is not necessarily a major issue, we think that it will be a challenge for us as budding data scientists to wrangle with the data appropriately, gauge which visualizations are most relevant for the story we are telling, and choosing an aesthetic (and/or aesthetics) that flows well with our narrative of data. For example, while the barplot above for "top 10 most frequently used words" is aesthetically pleasing, the data presented is not that interesting. Sure, Mac Miller does use the "I' pronoun a lot in his lyrics, but so do most other artists writing from a first-person perspective.
+While this is not necessarily a major issue, we think that it will be a challenge for us as budding data scientists to wrangle with the data appropriately, gauge which visualizations are most relevant for the story we are telling, and choosing an aesthetic (and/or aesthetics) that flows well with our narrative of data.
 
-Another potential issue with the data is the missing values, although we do not foresee this being a major problem given that there are only 8 in each dataset which is a small proportion of the overall data.
+For example, while the barplot above for "top 10 most frequently used words" is aesthetically pleasing, the data presented is not terribly interesting. Sure, Mac Miller does use the "I' pronoun a lot in his lyrics, but so do most other artists writing from a first-person perspective. Another example is the barplot for "number of songs per album". The albums are automatically alphabetized based on default `ggplot` settings, but it could be more insightful to see that plot arranged from most to least song or in chronological order (of release date).
+
+Another potential issue with the data is the missing values, although we do not foresee this being a major problem given that there are only 8 in each data set which is a small proportion of the overall data. Moreover, the missing values aren't actually missing, but rather, pauses in lyricism in a few select songs, i.e. instrumentals and beats.
+
+## Repository
+
+<https://github.com/susantmtran/302final>
