@@ -7,22 +7,51 @@
 #    http://shiny.rstudio.com/
 #
 
-library(shiny)
+## work in progrresss 
 library(tidyverse)
+library(wordcloud2)
+library(memoise)
+library(stringr)
 
 macaroni <- readRDS("data/processed/macaroni.rds")  # word-by-word data
+albums <- list("Circles" = "circles", 
+              "Faces" = "faces", 
+              "K.I.D.S" = "k.i.d.s", 
+              "Macadelic" = "macadelic", 
+              "Swimming" = "swimming",
+              "The Divine Feminine" = "the divine feminine")
+
+getTermMatrix <- memoise(function(album) {
+    if(!(album %in% albums))
+        stop("Unknown Album")
+ 
+    myCorpus = tm_map(myCorpus, removeWords,
+                      c(stopwords("SMART"), "i", "the", "you", "a", "and", "to"))
+    myDTM = TermDocumentMatrix(myCorpus,
+                               control = list(minWordLength = 1))
+    
+    m = as.matrix(myDTM)
+    
+    sort(rowSums(m), decreasing = TRUE)
+})
 
 ui <- fluidPage(
 
     # Application title
-    titlePanel("Top 10 Most Frequently Used Words by Album"),
+    titlePanel("Most Frequently Used Words by Album"),
 
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
             helpText("Pick Mac Miller's albums"),
             selectInput("album", label = "Select album below", 
-                        choices = rownames(macaroni))
+                        choices = albums),
+            sliderInput("freq",
+                        "Minimum Frequency:",
+                        min = 1,  max = 50, value = 15),
+            sliderInput("max",
+                        "Maximum Number of Words:",
+                        min = 1,  max = 300,  value = 100)
         ),
 
         # Show a plot of the generated distribution
@@ -33,8 +62,22 @@ ui <- fluidPage(
 )
 
 # Define server logic required to draw a histogram
-server <- function(input, output) {
-
+server <- function(input, output, session) {
+    terms <- reactive({
+        input$update
+        isolate({
+            withProgress({
+                setProgress(message = "Processing corpus...")
+                getTermMatrix(input$selection)
+            })
+            
+        })
+        
+        
+    })
+    
+    wordcloud_rep <- repeatable(wordcloud)
+    
     output$distPlot <- renderPlot({
         # generate bins based on input$bins from ui.R
         ## ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
@@ -52,8 +95,9 @@ server <- function(input, output) {
                 ##  legend.position = "none",
                ##   plot.title = element_text(family = "Royal Acid", size = 10, hjust = 0.5),
                 ##  plot.subtitle = element_text(hjust = 0.5))
-        barplot(macaroni[,input$album],
-                main=input$album)
+        v <- terms()
+        wordcloud_rep(names(v), v, scale = c(4, 0.5),
+                      min.freq = input$freq, max.words = input$max)
     })
 }
 
