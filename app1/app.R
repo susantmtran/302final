@@ -8,96 +8,72 @@
 #
 
 ## work in progrresss 
+
 library(tidyverse)
-library(wordcloud2)
-library(memoise)
-library(stringr)
+library(tidytext)
+library(showtext)
+library(extrafont)
+library(ggthemes)
+library(RColorBrewer)
+library(ggrepel)
+library(patchwork)
 
 macaroni <- readRDS("data/processed/macaroni.rds")  # word-by-word data
-albums <- list("Circles" = "circles", 
+love_words <- sort(unique(str_subset(macaroni$word, "^lov")))
+love_counts <- macaroni %>%
+    group_by(album, song) %>%
+    summarise(love_count = sum(word %in% love_words))
+top_love <- love_counts %>%
+    top_n(5, love_count)
+
+
+album <- list("Circles" = "circles", 
               "Faces" = "faces", 
-              "K.I.D.S" = "k.i.d.s", 
               "Macadelic" = "macadelic", 
               "Swimming" = "swimming",
               "The Divine Feminine" = "the divine feminine")
 
-getTermMatrix <- memoise(function(album) {
-    if(!(album %in% albums))
-        stop("Unknown Album")
- 
-    myCorpus = tm_map(myCorpus, removeWords,
-                      c(stopwords("SMART"), "i", "the", "you", "a", "and", "to"))
-    myDTM = TermDocumentMatrix(myCorpus,
-                               control = list(minWordLength = 1))
-    
-    m = as.matrix(myDTM)
-    
-    sort(rowSums(m), decreasing = TRUE)
-})
-
 ui <- fluidPage(
 
     # Application title
-    titlePanel("Most Frequently Used Words by Album"),
+    titlePanel("Songs with Most Frequent 'Love' by Album"),
 
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
             helpText("Pick Mac Miller's albums"),
             selectInput("album", label = "Select album below", 
-                        choices = albums),
-            sliderInput("freq",
-                        "Minimum Frequency:",
-                        min = 1,  max = 50, value = 15),
-            sliderInput("max",
-                        "Maximum Number of Words:",
-                        min = 1,  max = 300,  value = 100)
+                        choices = album)
         ),
 
         # Show a plot of the generated distribution
         mainPanel(
-           plotOutput("distPlot")
+           plotOutput("lovecountPlot")
         )
     )
 )
 
 # Define server logic required to draw a histogram
-server <- function(input, output, session) {
-    terms <- reactive({
-        input$update
-        isolate({
-            withProgress({
-                setProgress(message = "Processing corpus...")
-                getTermMatrix(input$selection)
-            })
-            
-        })
-        
-        
+server <- function(input, output) {
+    
+    lovecount_subset <- reactive({
+        req(input$album)
+        filter(love_counts, album %in% input$album)
     })
-    
-    wordcloud_rep <- repeatable(wordcloud)
-    
-    output$distPlot <- renderPlot({
+        
+        output$lovecountPlot <- renderPlot({
         # generate bins based on input$bins from ui.R
-        ## ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
-            ##ggplot(macaroni, aes_string(input$album)) 
-           ## geom_col(aes(word, n)) +
-            ##geom_text(aes(label = reorder(word, n)), 
-                     ## color = "white", size = 5, family = "Inconsolata",
-                     ## hjust = 1.5) +
-           ## scale_fill_brewer(palette = "Spectral") +
-           ## coord_flip() + # switch x and y
-            ##theme_classic() +
-          ##  theme(text = element_text(family = "Inconsolata"),
-                 ## axis.text.y = element_blank(),
-                 ## axis.title = element_blank(),
-                ##  legend.position = "none",
-               ##   plot.title = element_text(family = "Royal Acid", size = 10, hjust = 0.5),
-                ##  plot.subtitle = element_text(hjust = 0.5))
-        v <- terms()
-        wordcloud_rep(names(v), v, scale = c(4, 0.5),
-                      min.freq = input$freq, max.words = input$max)
+        ggplot(lovecount_subset(), aes(x = song, love_count)) +
+                geom_col(fill = "#FFB6C1") +
+                theme_minimal() +
+                coord_flip() +
+                labs(x = "Songs in Album", y = "Number of 'Love's") +
+                theme(text = element_text(family = "Inconsolata"),
+                      axis.title = element_text(size = 14),
+                      axis.text.x = element_text(),
+                      plot.title = element_text(family = "Royal Acid", size = 10, hjust = 0.5),
+                      plot.subtitle = element_text(hjust = 0.5))
+                
     })
 }
 

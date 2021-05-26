@@ -27,7 +27,6 @@ love_words <- macaroni_love %>%
   ggtitle("Top 10 Most Frequently Used Words", 
           subtitle = "Mac Miller Discography 2010–2020 ") +
   theme(text = element_text(family = "Inconsolata"),
-        axis.text.y = element_blank(),
         axis.title = element_blank(),
         legend.position = "none",
         plot.title = element_text(family = "Royal Acid", size = 15, hjust = 0.5),
