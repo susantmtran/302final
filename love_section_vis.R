@@ -19,7 +19,7 @@ love_words <- macaroni_love %>%
   top_n(10) %>% 
   ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
   geom_col() +
-  geom_text(aes(label = reorder(word, n)), 
+  geom_text(aes(label = n),
             color = "black", size = 5, family = "Inconsolata",
             vjust = -0.6) +
   scale_fill_brewer(palette = "RdPu") +
@@ -28,6 +28,7 @@ love_words <- macaroni_love %>%
           subtitle = "Mac Miller Discography 2010–2020 ") +
   theme(text = element_text(family = "Inconsolata"),
         axis.title = element_blank(),
+        axis.text.x = element_text(size = 14),
         legend.position = "none",
         plot.title = element_text(family = "Royal Acid", size = 15, hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5))
