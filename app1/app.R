@@ -44,10 +44,13 @@ ui <- fluidPage(
     # Sidebar with a slider input for number of bins 
     sidebarLayout(position = "right",
         sidebarPanel(
+            img(src = "mac.jpeg", width = "80%", style="display: block; margin-left: auto; margin-right: auto;"), br(),
             style = "background: #ffd1dc",
-            helpText("Pick one of Mac Miller's albums"),
-            selectInput("album", label = "Select below", 
-                        choices = album),
+            helpText("Pick one of Mac Miller's albums to see how many times 'Love' 
+                     (or some variation of 'Love') is in his songs."),
+            selectInput("album", label = "Select album below", 
+                        choices = album), br(),
+            "Lyrical data used from___  source"
         ),
 
         # Show a plot of the generated distribution
