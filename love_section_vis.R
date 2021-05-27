@@ -24,7 +24,7 @@ love_words <- macaroni_love %>%
             vjust = -0.6) +
   scale_fill_brewer(palette = "RdPu") +
   theme_classic() +
-  ggtitle("Top 10 Most Frequently Used Words", 
+  ggtitle("Frequently Used Words: Love Edition", 
           subtitle = "Mac Miller Discography 2010–2020 ") +
   theme(text = element_text(family = "Inconsolata"),
         axis.title = element_blank(),

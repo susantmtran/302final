@@ -16,6 +16,7 @@ library(extrafont)
 library(ggthemes)
 library(RColorBrewer)
 library(ggrepel)
+library(markdown)
 library(patchwork)
 
 macaroni <- readRDS("data/processed/macaroni.rds")  # word-by-word data
@@ -33,11 +34,16 @@ album <- list("The Divine Feminine" = "the divine feminine",
               "Swimming" = "swimming",
               "Circles" = "circles")
 
-ui <- fluidPage(
+function(input, output, session)
+output$summary <- renderPrint({
+    summary(macaroni)
+})
+
+ui <- navbarPage(
     tags$head(
         tags$style("label{font-family: Inconsolata;}")
     ),
-
+    tabPanel("Love",
     # Application title
     titlePanel("LOVE in Mac Miller's Discography"),
     
@@ -58,7 +64,10 @@ ui <- fluidPage(
            plotOutput("lovecountPlot")
         )
     )
-)
+),
+    tabPanel("2love",
+             verbatimTextOutput("summary")))
+
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
