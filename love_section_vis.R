@@ -12,7 +12,7 @@ library(patchwork)
 macaroni <- readRDS("data/processed/macaroni.rds")  # word-by-word data
 
 macaroni_love <- macaroni %>%
-  filter(word == "love" | word == "baby" | word == "heart" | word == "beautiful" | word == "kiss" | word == "soulmate") 
+  filter(word == "love" | word == "baby" | word == "heart" | word == "beautiful" | word == "kiss" | word == "sex") 
 
 love_words <- macaroni_love %>% 
   count(word, sort = TRUE) %>% 
