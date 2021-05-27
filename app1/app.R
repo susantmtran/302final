@@ -16,6 +16,7 @@ library(extrafont)
 library(ggthemes)
 library(RColorBrewer)
 library(ggrepel)
+library(wordcloud2)
 library(markdown)
 library(patchwork)
 
@@ -65,8 +66,12 @@ ui <- navbarPage(
         )
     )
 ),
-    tabPanel("2love",
-             verbatimTextOutput("summary")))
+    tabPanel("attempting a word cloud",
+             verbatimTextOutput("summary")),
+mainPanel(
+    plotOutput("wordcloud"))
+
+)
 
 
 # Define server logic required to draw a histogram
@@ -90,10 +95,22 @@ server <- function(input, output) {
                       axis.title = element_text(size = 14),
                       axis.text.x = element_text(),
                       plot.title = element_text(family = "Royal Acid", size = 10, hjust = 0.5),
-                      plot.subtitle = element_text(hjust = 0.5))
+                      plot.subtitle = element_text(hjust = 0.5))})
+        
+        word_counts <- reactive({
+            req(input$song)
+            macaroni %>%
+                select(word) %>%
+                anti_join(stop_words, by = "word") %>%
+                count(word, sort = TRUE)
+        })
+        
+        output$wordcloud <- renderWordcloud2({
+            wordcloud2(word_counts(), size = 1.6, fontFamily = "Courier",
+                       color=rep_len(pal[2:4], nrow(word_counts())), backgroundColor = "black")
             
-                
-    })
+            
+        })
 }
 
 # Run the application 
