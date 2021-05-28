@@ -89,7 +89,7 @@ server <- function(input, output) {
                 theme_bw() +
                 labs(x = "Songs in Album", y = "Number of 'Love's") +
                 scale_x_discrete(expand = c(0,0.8)) +
-                scale_y_continuous(expand = c(0,0.3)) +
+                scale_y_continuous(expand = c(0,0)) +
                 coord_flip() +
                 theme(text = element_text(family = "Inconsolata"),
                       axis.title = element_text(size = 14),
