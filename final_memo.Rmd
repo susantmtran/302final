@@ -1,0 +1,31 @@
+---
+title: "Final Memo"
+author: "Jamie Lee, Susan Tran, Grace Park"
+date: "5/25/2021"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    highlight: "tango"
+    theme: paper
+editor_options: 
+  chunk_output_type: console
+---
+
+```{=html}
+<style type="text/css">
+  body{
+  font-family: "Inconsolata Black", monospace;
+}
+</style>
+```
+
+```{r global_options, include=FALSE}
+library(knitr)
+opts_chunk$set(warning=FALSE, message=FALSE, dpi = 300)
+```
+---
+
+## Visualization Memo
+
+> What is the core concept(s) or insight(s) into the data that you believe the visualization communicates?
