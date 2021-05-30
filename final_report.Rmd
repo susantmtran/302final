@@ -2,7 +2,14 @@
 title: "Final Report"
 author: "Jamie Lee, Susan Tran, Grace Park"
 date: "5/30/2021"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    highlight: "tango"
+    theme: paper
+editor_options: 
+  chunk_output_type: console
 ---
 
 (document is for compiling all of our graphics together into one report; add citation for data; NO CODE)
@@ -17,6 +24,10 @@ Our final report is on analyzing.... Our data source is from....
 
 **brief explanation here**
 
+![](plots/animation.gif)
+
+**brief explanation here**
+
 ## Walking Through the Lyrics
 
 ![](plots/most_common_words.png)
@@ -28,6 +39,8 @@ Our final report is on analyzing.... Our data source is from....
 **brief explanation here**
 
 ![](plots/sad_common_words.png)
+
+## Interactive App
 
 Link to our app:
 
