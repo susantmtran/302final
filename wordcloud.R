@@ -35,8 +35,5 @@ mywordcloud <- wordcloud2(data = word_count, color = rep_len(
 
 htmlwidgets::saveWidget(mywordcloud, file = "mywordcloud.html", selfcontained = F)
 
-webshot("mywordcloud.html", "fig_1.png", delay = 20, vwidth = 2000, vheight = 2000)
-
-webshot::install_phantomjs()
 
 

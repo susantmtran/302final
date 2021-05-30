@@ -5,6 +5,9 @@ library(extrafont)
 library(ggthemes)
 library(RColorBrewer)
 library(ggrepel)
+library(gganimate)
+library(gapminder)
+library(gifski)
 
 malcolm <- readRDS("data/processed/malcolm.rds") # lyrical data
 
@@ -26,7 +29,7 @@ malcolm <- readRDS("data/processed/malcolm.rds") # lyrical data
 year_data <- data.frame(year = 2010:2020,
                    count = c(18, 0, 17,0, 24,0, 10,0, 13,0, 12))
 
-ggplot(year_data, aes(x = year, y = count, group = 1)) +
+animation <- ggplot(year_data, aes(x = year, y = count, group = 1)) +
   geom_line(aes(group = 1), color = "#71a6d2") +
   geom_point(size = 3, color = "#708090") +
   labs(title = "Release of Mac Miller's Songs Across Active Years", 
@@ -38,9 +41,11 @@ ggplot(year_data, aes(x = year, y = count, group = 1)) +
                                   hjust = 0.5, color = "#6699cc"),
         plot.caption = element_text(size = 10, hjust = 1),
         axis.title = element_text(family = "Royal Acid", color = "#708090")) +
-  scale_x_continuous(name = "Year", breaks = c(2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020))
+  scale_x_continuous(name = "Year", breaks = c(2010, 2011, 2012, 2013, 2014, 2015, 
+                                               2016, 2017, 2018, 2019, 2020)) +
+  transition_reveal(year)
 
-ggsave("plots/songs_per_year.png")
-
+animate(animation, height = 1000, width = 1000, res = 150, renderer = gifski_renderer())
+anim_save("plots/animation.gif")
 
 
