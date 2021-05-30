@@ -71,6 +71,7 @@ server <- function(input, output) {
   lovecount_subset <- reactive({
     req(input$album)
     filter(love_counts, album %in% input$album)
+    
   })
   
   output$lovecountPlot <- renderPlot({
