@@ -31,7 +31,7 @@ word_count <- count(wordcloud_data, 'word')
 
 mywordcloud <- wordcloud2(data = word_count, color = rep_len(
     c("orange", "#d0c816", "#f2905a", "#ff8668"), 
-       nrow(word_count)), shape = "triangle-forward") 
+       nrow(word_count)), shape = "circle") 
 
 htmlwidgets::saveWidget(mywordcloud, file = "mywordcloud.html", selfcontained = F)
 
