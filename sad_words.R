@@ -22,7 +22,7 @@ sad_words <- macaroni_sad %>%
   geom_text(aes(label = n),
             color = "black", size = 5, family = "Inconsolata",
             vjust = -0.6) +
-  scale_fill_brewer(palette = "RdPu") +
+  scale_fill_brewer(palette = "PuBu") +
   theme_classic() +
   ggtitle("Frequently Used Words: Sad Edition", 
           subtitle = "Mac Miller Discography 2010–2020 ") +
