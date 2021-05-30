@@ -1,7 +1,6 @@
 ---
-title: "Final Report"
+title: "A Look into Mac Miller's Music"
 author: "Jamie Lee, Susan Tran, Grace Park"
-date: "5/30/2021"
 output:
   html_document:
     toc: true
@@ -14,7 +13,7 @@ editor_options:
 
 (document is for compiling all of our graphics together into one report; add citation for data; NO CODE)
 
-# Mac Miller's Discography
+## Mac Miller's Discography
 
 Our final report is on analyzing.... Our data source is from....
 
