@@ -1,0 +1,34 @@
+---
+title: "Final Report"
+author: "Jamie Lee, Susan Tran, Grace Park"
+date: "5/30/2021"
+output: html_document
+---
+
+(document is for compiling all of our graphics together into one report; add citation for data; NO CODE)
+
+# Mac Miller's Discography
+
+Our final report is on analyzing.... Our data source is from....
+
+## Breakdown of Mac Miller's Work
+
+![](plots/songs_per_album.png)
+
+**brief explanation here**
+
+## Walking Through the Lyrics
+
+![](plots/most_common_words.png)
+
+**brief explanation here**
+
+![](plots/love_common_words.png)
+
+**brief explanation here**
+
+![](plots/sad_common_words.png)
+
+Link to our app:
+
+(havent published tthe link yet but will do when it is complete)

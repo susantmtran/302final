@@ -28,6 +28,16 @@ love_counts <- macaroni %>%
 top_love <- love_counts %>%
     top_n(5, love_count)
 
+wordcloud_data <- macaroni %>%
+    anti_join(stop_words) %>%
+    group_by(word) %>%
+    filter(n() >= 10)
+
+wordcloud_data <- wordcloud_data[!(wordcloud_data$word %in% c("yeah", "wanna", 
+                                                              "uh","told", "til", "da", "i'ma", "em")),]
+
+word_count <- count(wordcloud_data, 'word') 
+
 
 album <- list("The Divine Feminine" = "the divine feminine",
               "Faces" = "faces", 
@@ -67,9 +77,17 @@ ui <- navbarPage(
     )
 ),
     tabPanel("attempting a word cloud",
-            verbatimTextOutput("summary")),
+             titlePanel("Mac's Word Cloud"),
+        sidebarLayout(position = "right",
+                 sidebarPanel(style = "background:#ffcba4",
+                              helpText("Hover over the words to see how many times each non-stop
+                                       word appeared in Mac Miller's song collection."),
+                              br(),
+                              "Data used from ___source"
+                              ),
         mainPanel(
-             plotOutput("wordcloud"))
+             wordcloud2Output("wordcloud", width = "100%", height = "565px")))
+)
 
 )
 
@@ -96,22 +114,16 @@ server <- function(input, output) {
                       axis.text.x = element_text(),
                       plot.title = element_text(family = "Royal Acid", size = 10, hjust = 0.5),
                       plot.subtitle = element_text(hjust = 0.5))})
-        
-        word_counts <- reactive({
-            req(input$song)
-            macaroni %>%
-                select(word) %>%
-                anti_join(stop_words, by = "word") %>%
-                count(word, sort = TRUE)
-        })
+    
         
         output$wordcloud <- renderWordcloud2({
-            wordcloud2(word_counts(), size = 1.6, fontFamily = "Courier",
-                       color=rep_len(pal[2:4], nrow(word_counts())), backgroundColor = "black")
-            
-            
-        })
-}
+            wordcloud2(word_count, color = rep_len(
+                c("orange", "#d0c816", "#f2905a", "#ff8668"), 
+                nrow(word_count)), shape = "triangle-forward")})
+        
+}        
+        
+      
 
 # Run the application 
 shinyApp(ui = ui, server = server)
