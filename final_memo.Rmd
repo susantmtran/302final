@@ -29,3 +29,5 @@ opts_chunk$set(warning=FALSE, message=FALSE, dpi = 300)
 ## Visualization Memo
 
 > What is the core concept(s) or insight(s) into the data that you believe the visualization communicates?
+
+Why did we pick that visualization? what is the purpose
