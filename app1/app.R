@@ -57,6 +57,7 @@ ui <- navbarPage(
     tags$style("label{font-family: Inconsolata;}")
   ),
   tabPanel("Love",
+           tags$audio(src = "instrumental.mp3", type = "audio/mp3", autoplay = NA, controls = NA),
            # Application title
            titlePanel("LOVE in Mac Miller's Discography"),
            
@@ -91,7 +92,8 @@ ui <- navbarPage(
                          mainPanel(
                            wordcloud2Output("wordcloud", width = "100%", height = "565px")))
   
-))
+)
+)
 
 
 # Define server logic required to draw a histogram
