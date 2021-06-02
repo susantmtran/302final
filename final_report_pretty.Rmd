@@ -1,8 +1,7 @@
 ---
 title: "REMember"
-subtitle: "An Analysis of Mac Miller's Discography"
+subtitle: "An Analysis of Mac Miller's Discography From 2010–2020"
 author: "Jamie Lee, Grace Park, Susan Tran"
-date: "08 June 2021"
 output: 
   prettydoc::html_pretty:
     theme: leonids
@@ -15,19 +14,77 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{=html}
-<style type = "text/css">
-  body {
-    font-family: "Inconsolata Black", monospace; }
+```{css echo=FALSE}
+body {
+  font-family: "Inconsolata Black", monospace; }
+
+a {
+  color: #8C6E68 }
+  a:hover, a:focus {
+    color: #BF9B8E; }
+
+code {
+  font-weight: 550;
+  color: #8C6E68; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #8C6E68; }
+
+.cover-card {
+  text-align: center; }
   
-  .cover {
-      background-color: #F2F2F2;
-      text-align: center;
-  }
+.cover-card .author_name {
+  color: #8C6E68;
+  font-size: 3em;
+  line-height: 100% }
+    
+.cover-card .author_job {
+  color: #D9C1BF;
+  font-size: 1em;
+  font-weight: 500;
+  text-transform: uppercase; }
+    
+.cover-card .author_bio {
+  font-size: 0.75em;
+  font-style: italic}
+
+.post-listing {
+  width: 80%; }
+
+#post {
+  font-size: 0.85em; }
   
-  .cover-card .author_name {
-    color: #64bc9c;
-    font-size: 3em; }
-</style>
+#post h2 {
+  padding-bottom: 0em;
+  border-bottom: thick double #D9C1BF; }
 ```
-## Mac Miller's Discography
+
+## Abstract
+
+Our project reflects an in-depth analysis of the song lyrics from late musical artist Mac Miller's discography. Throughout his career, Mac Miller released six studio albums, two extended plays, two live albums, and thirteen mixtapes. Using [Josiah Parry's `genius` package](https://github.com/JosiahParry/genius) and the resources provided on Github, we pulled lyrical data for six specific projects: Circles (2020), Swimming (2018), The Divine Feminine (2016), Faces (2014), Macadelic (2012), and K.I.D.S. (2010).
+
+## Over the Years
+
+![](plots/songs_per_album.png)
+
+explain
+
+![](plots/animation.gif)
+
+explain
+
+## Lyric by Lyric
+
+![](plots/most_common_words.png)
+
+explain
+
+![](plots/love_common_words.png)
+
+explain
+
+![](plots/sad_common_words.png)
+
+explain
+
+## Interactive App
