@@ -39,6 +39,12 @@ album <- list("The Divine Feminine" = "the divine feminine",
               "Swimming" = "swimming",
               "Circles" = "circles")
 
+music <- list("The Divine Feminine" = ".mp3",
+              "Faces" = ".mp3", 
+              "Macadelic" = ".mp3", 
+              "Swimming" = ".mp3",
+              "Circles" = ".mp3")
+
 # second tab initial steps
 wordcloud_data <- macaroni %>%
   anti_join(stop_words) %>%
@@ -57,7 +63,6 @@ ui <- navbarPage(
     tags$style("label{font-family: Inconsolata;}")
   ),
   tabPanel("Love",
-           tags$audio(src = "instrumental.mp3", type = "audio/mp3", autoplay = NA, controls = NA),
            # Application title
            titlePanel("LOVE in Mac Miller's Discography"),
            
@@ -70,7 +75,8 @@ ui <- navbarPage(
                      (or some variation of 'Love') is in his songs."),
                            selectInput("album", label = "Select album below", 
                                        choices = album), br(),
-                           "Lyrical data used from___  source"
+                           "Lyrical data used from___  source",
+                     tags$audio(src = "instrumental.mp3", type = "audio/mp3", autoplay = NA, controls = NA),
                          ),
                          
                          # Show a plot of the generated distribution
