@@ -98,4 +98,6 @@ explain
 
 explain
 
+![](plots/faces_album.png)
+
 ## Interactive App
