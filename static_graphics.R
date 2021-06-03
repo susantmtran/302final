@@ -125,8 +125,54 @@ ggsave("plots/most_common_words.png")
 # PLOT 4 ------------------------------------------------------------------
 # frequently used words pertaining to love
 
+macaroni %>%
+  filter(word == "love" | word == "baby" | word == "heart" |
+           word == "beautiful"| word == "kiss" | word == "sex") %>% 
+  count(word, sort = TRUE) %>% 
+  top_n(10) %>% 
+  ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
+  geom_col() +
+  geom_text(aes(label = n),
+            color = "black", size = 5, family = "Inconsolata",
+            vjust = -0.6) +
+  scale_fill_brewer(palette = "RdPu") +
+  theme_classic() +
+  ggtitle("Wearing Rose-Colored Glasses",
+          subtitle = "Frequently Used Words: Love Edition") +
+  theme(text = element_text(family = "Inconsolata"),
+        axis.title = element_blank(),
+        axis.text.x = element_text(size = 14),
+        legend.position = "none",
+        plot.title = element_text(family = "Royal Acid", size = 15, hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5))
+
+ggsave("plots/love_common_words.png")
+
 # PLOT 5 ------------------------------------------------------------------
 # frequently used words pertaining to sadness
+
+macaroni %>%
+  filter(word == "sad" | word == "hurt" | word == "hate" |
+           word == "cry" | word == "pain" | word == "break") %>% 
+  count(word, sort = TRUE) %>% 
+  top_n(10) %>% 
+  ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
+  geom_col() +
+  geom_text(aes(label = n),
+            color = "black", size = 5, family = "Inconsolata",
+            vjust = -0.6) +
+  scale_fill_brewer(palette = "PuBu") +
+  theme_classic() +
+  ggtitle("Feeling Blue (Da Ba Dee...)", 
+          subtitle = "Frequently Used Words: Sad Edition") +
+  theme(text = element_text(family = "Inconsolata"),
+        axis.title = element_blank(),
+        axis.text.x = element_text(size = 14),
+        legend.position = "none",
+        plot.title = element_text(family = "Royal Acid", size = 15, hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5))
+
+ggsave("plots/sad_common_words.png")
 
 # PLOT 6 ------------------------------------------------------------------
 

@@ -12,9 +12,12 @@ library(patchwork)
 macaroni <- readRDS("data/processed/macaroni.rds")  # word-by-word data
 
 macaroni_love <- macaroni %>%
-  filter(word == "love" | word == "baby" | word == "heart" | word == "beautiful" | word == "kiss" | word == "sex") 
+  filter(word == "love" | word == "baby" | word == "heart" |
+           word == "beautiful"| word == "kiss" | word == "sex") 
 
-love_words <- macaroni_love %>% 
+macaroni %>%
+  filter(word == "love" | word == "baby" | word == "heart" |
+           word == "beautiful"| word == "kiss" | word == "sex") %>% 
   count(word, sort = TRUE) %>% 
   top_n(10) %>% 
   ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
@@ -24,8 +27,8 @@ love_words <- macaroni_love %>%
             vjust = -0.6) +
   scale_fill_brewer(palette = "RdPu") +
   theme_classic() +
-  ggtitle("Frequently Used Words: Love Edition", 
-          subtitle = "Mac Miller Discography 2010–2020 ") +
+  ggtitle("Wearing Rose-Colored Glasses",
+          subtitle = "Frequently Used Words: Love Edition") +
   theme(text = element_text(family = "Inconsolata"),
         axis.title = element_blank(),
         axis.text.x = element_text(size = 14),
@@ -34,6 +37,5 @@ love_words <- macaroni_love %>%
         plot.subtitle = element_text(hjust = 0.5))
 
 ggsave("plots/love_common_words.png")
-
 
 

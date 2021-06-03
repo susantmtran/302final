@@ -14,7 +14,9 @@ macaroni <- readRDS("data/processed/macaroni.rds")  # word-by-word data
 macaroni_sad <- macaroni %>%
   filter(word == "sad" | word == "hurt" | word == "hate" | word == "cry" | word == "pain" | word == "break") 
 
-sad_words <- macaroni_sad %>% 
+macaroni %>%
+  filter(word == "sad" | word == "hurt" | word == "hate" |
+           word == "cry" | word == "pain" | word == "break") %>% 
   count(word, sort = TRUE) %>% 
   top_n(10) %>% 
   ggplot(aes(reorder(word, n), n, fill = reorder(word, -n))) +
@@ -24,8 +26,8 @@ sad_words <- macaroni_sad %>%
             vjust = -0.6) +
   scale_fill_brewer(palette = "PuBu") +
   theme_classic() +
-  ggtitle("Frequently Used Words: Sad Edition", 
-          subtitle = "Mac Miller Discography 2010–2020 ") +
+  ggtitle("Feeling Blue (Da Ba Dee...)", 
+          subtitle = "Frequently Used Words: Sad Edition") +
   theme(text = element_text(family = "Inconsolata"),
         axis.title = element_blank(),
         axis.text.x = element_text(size = 14),
