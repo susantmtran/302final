@@ -22,6 +22,9 @@ ggplot(macaroni,
        subtitle = "Number of words in each song in 'Faces'") +
   theme_minimal() +
   theme(panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())
+        panel.grid.minor = element_blank(),
+        text = element_text(family = "Inconsolata"),
+        plot.title = element_text(family = "Royal Acid", size = 20, hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5))
 
 ggsave("plots/faces_album.png")
