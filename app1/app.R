@@ -39,11 +39,11 @@ album <- list("The Divine Feminine" = "the divine feminine",
               "Swimming" = "swimming",
               "Circles" = "circles")
 
-music <- list("The Divine Feminine" = ".mp3",
-              "Faces" = ".mp3", 
-              "Macadelic" = ".mp3", 
-              "Swimming" = ".mp3",
-              "Circles" = ".mp3")
+music <- list("The Divine Feminine" = "divinefeminine.mp3",
+              "Faces" = "faces.mp3", 
+              "Macadelic" = "macadelic.mp3", 
+              "Swimming" = "swimming.mp3",
+              "Circles" = "circles.mp3")
 
 # second tab initial steps
 wordcloud_data <- macaroni %>%
@@ -59,50 +59,40 @@ word_count <- count(wordcloud_data, word)
 
 
 ui <- navbarPage(
-  tags$head(
-    tags$style("label{font-family: Inconsolata;}")
-  ),
-  tabPanel("Love",
-           # Application title
-           titlePanel("LOVE in Mac Miller's Discography"),
-           
-           # Sidebar with a slider input for number of bins 
-           sidebarLayout(position = "right",
-                         sidebarPanel(
-                           img(src = "mac.jpeg", width = "60%", style="display: block; margin-left: auto; margin-right: auto;"), br(),
-                           style = "background: #ffd1dc",
-                           helpText("Pick one of Mac Miller's albums to see how many times 'Love' 
+  tags$head(tags$style("label{font-family: Inconsolata;}")),
+  tabPanel(
+    "Love Lyrics",
+    titlePanel("LOVE in Mac Miller's Discography"),
+    sidebarLayout(position = "right",
+        sidebarPanel(img(src = "mac.jpeg", width = "60%",
+                         style = "display: block; margin-left: auto; margin-right: auto;"),
+                     br(),
+                     style = "background: #ffd1dc",
+                     helpText("Pick one of Mac Miller's albums to see how many times 'Love' 
                      (or some variation of 'Love') is in his songs."),
-                           selectInput("album", label = "Select album below", 
-                                       choices = album), br(),
-                           "Lyrical data used from___  source",
-                     tags$audio(src = "instrumental.mp3", type = "audio/mp3", autoplay = NA, controls = NA),
-                         ),
-                         
-                         # Show a plot of the generated distribution
-                         mainPanel(
-                           plotOutput("lovecountPlot")
-                         )
-           )
-  ),
-  tabPanel("Lyrical Word Cloud",
-           titlePanel("Mac's Word Cloud"),
-           sidebarLayout(position = "right",
-                         sidebarPanel(style = "background:#ffcba4",
-                                      img(src = "orangemac.png", width = "80%", style="display: block; margin-left: auto; margin-right: auto;"), br(),
-                                      helpText("Hover over the words to see how many times each non-stop
-                                       word appeared in Mac Miller's song collection."),
-                                      br(),
-                                      "Data used from ___source"
-                         ),
-                         mainPanel(
-                           wordcloud2Output("wordcloud", width = "100%", height = "565px")))
-  
-)
-)
+                     selectInput("album", label = "Select album below", choices = album),
+                     br(),
+                     "LYRICAL DATA PULLED FROM GENIUS",
+                     tags$audio(src = "swimming.mp3", type = "audio/mp3",
+                                autoplay = NA, controls = NA)),
+        mainPanel(plotOutput("lovecountPlot")))
+    ),
+  tabPanel(
+    "Lyrical Word Cloud",
+    titlePanel("Mac Miller's Word Cloud"),
+    sidebarLayout(position = "right",
+        sidebarPanel(style = "background: #ffcba4",
+                     img(src = "orangemac.png", width = "80%",
+                         style = "display: block; margin-left: auto; margin-right: auto;"),
+                     br(),
+                     helpText("Hover over the words to see how many times each non-stop
+                     word appeared in Mac Miller's song collection."),
+                     br(),
+                     "LYRICAL DATA PULLED FROM GENIUS"),
+        mainPanel(wordcloud2Output("wordcloud"),
+                  width = 7)))
+  )
 
-
-# Define server logic required to draw a histogram
 server <- function(input, output) {
   
   lovecount_subset <- reactive({
@@ -112,11 +102,10 @@ server <- function(input, output) {
   })
   
   output$lovecountPlot <- renderPlot({
-    # generate bins based on input$bins from ui.R
     ggplot(lovecount_subset(), aes(x = song, love_count)) +
       geom_col(fill = "#FFB6C1") +
       theme_bw() +
-      labs(x = "Songs in Album", y = "Number of 'Love's") +
+      labs(x = NULL, y = "'Love' Count by Song") +
       scale_x_discrete(expand = c(0,0.8)) +
       scale_y_continuous(expand = c(0,0)) +
       coord_flip() +
@@ -129,9 +118,7 @@ server <- function(input, output) {
   output$wordcloud <- renderWordcloud2({
     wordcloud2(word_count, color = rep_len(
       c("orange", "#d0c816", "#f2905a", "#ff8668"), 
-      nrow(word_count)), shape = "triangle-forward")})
-  
+      nrow(word_count)), shape = "cardioid", size = 0.4)})
 }
 
-# Run the application 
 shinyApp(ui = ui, server = server)
