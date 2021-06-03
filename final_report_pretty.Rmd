@@ -100,4 +100,8 @@ explain
 
 ![](plots/faces_album.png)
 
+explain
+
 ## Interactive App
+
+insert link to shiny here

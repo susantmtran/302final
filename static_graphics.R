@@ -200,4 +200,3 @@ faces %>%
         plot.subtitle = element_text(hjust = 0.5))
 
 ggsave("plots/faces_album.png")
-
