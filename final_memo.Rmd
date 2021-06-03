@@ -1,33 +1,73 @@
 ---
-title: "Final Memo"
-author: "Jamie Lee, Susan Tran, Grace Park"
-date: "5/25/2021"
+title: "REMember: A Data Memo"
+subtitle: "An Analysis of Mac Miller's Discography From 2010–2020"
+author: "Jamie Lee, Grace Park, Susan Tran"
 output: 
-  html_document:
-    toc: true
-    toc_float: true
-    highlight: "tango"
-    theme: paper
+  prettydoc::html_pretty:
+    theme: leonids
+    highlight: github
 editor_options: 
   chunk_output_type: console
 ---
 
-```{=html}
-<style type="text/css">
-  body{
-  font-family: "Inconsolata Black", monospace;
-}
-</style>
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r global_options, include=FALSE}
-library(knitr)
-opts_chunk$set(warning=FALSE, message=FALSE, dpi = 300)
+```{css echo=FALSE}
+body {
+  font-family: "Inconsolata Black", monospace; }
+
+*::-webkit-scrollbar {
+  width: 10px; }
+
+*::-webkit-scrollbar-track {
+  background: #BF9B8E; }
+
+*::-webkit-scrollbar-thumb {
+  background-color: #8C6E68;
+  border-radius: 20px;
+  border: 3px solid #8C6E68; }
+
+a {
+  color: #8C6E68 }
+  a:hover, a:focus {
+    color: #BF9B8E; }
+
+code {
+  font-weight: 550;
+  color: #8C6E68; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #8C6E68; }
+
+.cover-card {
+  text-align: center; }
+  
+.cover-card .author_name {
+  color: #8C6E68;
+  font-size: 3em;
+  line-height: 100% }
+    
+.cover-card .author_job {
+  color: #D9C1BF;
+  font-size: 1em;
+  font-weight: 500;
+  text-transform: uppercase; }
+    
+.cover-card .author_bio {
+  font-size: 0.75em;
+  font-style: italic}
+
+.post-listing {
+  width: 80%; }
+
+#post {
+  font-size: 0.85em; }
+  
+#post h2 {
+  padding-bottom: 0em;
+  border-bottom: thick double #D9C1BF; }
 ```
----
 
-## Visualization Memo
-
-> What is the core concept(s) or insight(s) into the data that you believe the visualization communicates?
-
-Why did we pick that visualization? what is the purpose
+What is the core concept(s) or insight(s) into the data that you believe the visualization communicates? Why did we pick that visualization? What is the purpose?
