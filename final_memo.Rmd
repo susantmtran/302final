@@ -1,6 +1,6 @@
 ---
-title: "REMember: A Data Memo"
-subtitle: "An Analysis of Mac Miller's Discography From 2010–2020"
+title: "REMember"
+subtitle: "The Data Memo"
 author: "Jamie Lee, Grace Park, Susan Tran"
 output: 
   prettydoc::html_pretty:
