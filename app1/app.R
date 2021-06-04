@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-=======
-
-## work in progrresss 
-
->>>>>>> cdf22cb571670aafb11cf0ef263e994aba65ad21
 library(tidyverse)
 library(tidytext)
 
@@ -34,12 +28,6 @@ album <- list("The Divine Feminine" = "the divine feminine",
               "Swimming" = "swimming",
               "Circles" = "circles")
 
-music <- list("The Divine Feminine" = "divinefeminine.mp3",
-              "Faces" = "faces.mp3", 
-              "Macadelic" = "macadelic.mp3", 
-              "Swimming" = "swimming.mp3",
-              "Circles" = "circles.mp3")
-
 # second tab initial steps
 wordcloud_data <- macaroni %>%
   anti_join(stop_words) %>%
@@ -67,11 +55,8 @@ ui <- navbarPage(
                      (or some variation of 'Love') is in his songs."),
                      selectInput("album", label = "Select album below", choices = album),
                      br(),
-                     "LYRICAL DATA PULLED FROM GENIUS",
-                     tags$audio(src = "swimming.mp3", type = "audio/mp3",
-                                autoplay = NA, controls = NA)),
-        mainPanel(plotOutput("lovecountPlot")))
-    ),
+                     "LYRICAL DATA PULLED FROM GENIUS"),
+        mainPanel(plotOutput("lovecountPlot")))),
   tabPanel(
     "Lyrical Word Cloud",
     titlePanel("Mac Miller's Word Cloud"),
@@ -92,9 +77,7 @@ server <- function(input, output) {
   
   lovecount_subset <- reactive({
     req(input$album)
-    filter(love_counts, album %in% input$album)
-    
-  })
+    filter(love_counts, album %in% input$album)})
   
   output$lovecountPlot <- renderPlot({
     ggplot(lovecount_subset(), aes(x = song, love_count)) +
@@ -106,7 +89,7 @@ server <- function(input, output) {
       coord_flip() +
       theme(text = element_text(family = "Inconsolata"),
             axis.title = element_text(size = 14),
-            axis.text.x = element_text(),
+            axis.text.x = element_blank(),
             plot.title = element_text(family = "Royal Acid", size = 10, hjust = 0.5),
             plot.subtitle = element_text(hjust = 0.5))})
   
