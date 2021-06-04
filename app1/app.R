@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+
+## work in progrresss 
+
+>>>>>>> cdf22cb571670aafb11cf0ef263e994aba65ad21
 library(tidyverse)
 library(tidytext)
 
@@ -44,7 +50,7 @@ wordcloud_data <- wordcloud_data[!(wordcloud_data$word %in% c("yeah", "wanna",
                                                               "uh","told", "til", "da", 
                                                               "i'ma", "em")),]
 
-word_count <- count(wordcloud_data, word) 
+word_count <- count(wordcloud_data, 'word') 
 
 
 ui <- navbarPage(
