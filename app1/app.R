@@ -1,24 +1,13 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
-## work in progrresss 
-
 library(tidyverse)
 library(tidytext)
+
 library(showtext)
 library(extrafont)
 library(ggthemes)
 library(RColorBrewer)
-library(ggrepel)
+
 library(wordcloud2)
 library(markdown)
-library(patchwork)
 
 # word-by-word data
 macaroni <- readRDS("data/processed/macaroni.rds") 
@@ -118,7 +107,7 @@ server <- function(input, output) {
   output$wordcloud <- renderWordcloud2({
     wordcloud2(word_count, color = rep_len(
       c("orange", "#d0c816", "#f2905a", "#ff8668"), 
-      nrow(word_count)), shape = "cardioid", size = 0.4)})
+      nrow(word_count)), shape = "circle")})
 }
 
 shinyApp(ui = ui, server = server)
