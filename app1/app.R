@@ -38,7 +38,7 @@ wordcloud_data <- wordcloud_data[!(wordcloud_data$word %in% c("yeah", "wanna",
                                                               "uh","told", "til", "da", 
                                                               "i'ma", "em")),]
 
-word_count <- count(wordcloud_data, 'word') 
+word_count <- count(wordcloud_data, word) 
 
 
 ui <- navbarPage(
@@ -96,7 +96,7 @@ server <- function(input, output) {
   output$wordcloud <- renderWordcloud2({
     wordcloud2(word_count, color = rep_len(
       c("orange", "#d0c816", "#f2905a", "#ff8668"), 
-      nrow(word_count)), shape = "circle")})
+      nrow(word_count)), shape = "circle", size = 0.4)})
 }
 
 shinyApp(ui = ui, server = server)
