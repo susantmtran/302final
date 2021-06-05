@@ -53,9 +53,7 @@ ui <- navbarPage(
                      style = "background: #ffd1dc",
                      helpText("Pick one of Mac Miller's albums to see how many times 'Love' 
                      (or some variation of 'Love') is in his songs."),
-                     selectInput("album", label = "Select album below", choices = album),
-                     br(),
-                     textOutput("text"),
+                     selectInput("album", label = NULL, choices = album),
                      br(),
                      "LYRICAL DATA PULLED FROM GENIUS"),
         mainPanel(plotOutput("lovecountPlot")))),
@@ -84,7 +82,7 @@ server <- function(input, output) {
     filter(love_counts, album %in% input$album)})
   
   music <- reactive(switch(input$album,
-                  "the divine feminine" = "thedivinefeminine",
+                  "the divine feminine" = "thedivinefeminine.mp3",
                   "faces" = "faces.mp3",
                   "macadelic" = "macadelic.mp3",
                   "swimming" = "swimming.mp3",
@@ -104,11 +102,16 @@ server <- function(input, output) {
             plot.title = element_text(family = "Royal Acid", size = 10, hjust = 0.5),
             plot.subtitle = element_text(hjust = 0.5))})
   
-  # music player, need to figure out how to not make the songs duplicate
+  # music player, need to figure out how to not make the music players duplicate
   observeEvent(input$album, {
     insertUI(selector = "#album",
              where = "afterEnd",
-             ui = tags$audio(src = music(), type = "audio/mp3", controls = NA))})
+             ui = tags$audio(src = music(), type = "audio/mp3", controls = NA))},
+    )
+  
+#  eventReactive(input$album, {
+#    removeUI(
+#      selector = "#album")})
   
   output$wordcloud <- renderWordcloud2({
     wordcloud2(word_count, color = rep_len(
