@@ -50,11 +50,12 @@ ui <- navbarPage(
         background-color: white;
         color: #8C6E68;
         font-family: 'Inconsolata';
+        text-align: center;
                     }
       h2 {
-        font-weight: bold;
+        font-weight: bolder;s
         position: relative;
-        left: 100px;
+        text-align: left;
                     }
       .shiny-input-container {
         color: #474747;
@@ -63,29 +64,43 @@ ui <- navbarPage(
         background-color: #D9C1BF !important;
                     }
       .navbar-default:hover {
-        background-color: #BF9B8E !important;
-        color: yellow;}"))),
+        background-color: #BF9B8E !important;}"))),
   
   tabPanel(
-    "I Think I'm in Love",
-    titlePanel("Lyrics about Love"),
+    "are you my soulmate, my angel? [love-related lyrics]",
+    titlePanel("lyrics about love"),
     sidebarLayout(position = "right",
-        sidebarPanel(img(src = "mac.jpeg", width = "60%",
+                  sidebarPanel(p(em("Yeah, are you my soulmate?")),
+                     p(em("My angel, what do you want with me?")),
+                     p("– Soulmate, The Divine Feminine"),
+                     img(src = "mac.jpeg", width = "60%",
                          style = "display: block; margin-left: auto; margin-right: auto;"),
                      br(),
-                     style = "background: #ffd1dc",
-                     helpText("Pick one of Mac Miller's albums to see how many times 'Love' 
-                     (or some variation of 'Love') is in his songs."),
+                     style = "background: #D9C1BF",
+                     p("Using the dropdown menu below, select an album to visualize
+                       the frequency of love-related lyrics in each of the album's
+                       songs. You can also use the audio player to hear an instrumental
+                       version of a song on the selected album."),
+                     br(),
                      selectInput("album", label = NULL, choices = album),
+                     p("Note that the default option, The Divine Feminine, is
+                       the most love-heavy album. Fans have theorized that he wrote
+                       the album for his high school sweetheart and/or his then-girlfriend
+                       Ariana Grande, who is featured on My Favorite Part."),
                      br(),
                      "LYRICAL DATA PULLED FROM GENIUS"),
-        mainPanel(plotOutput("lovecountPlot")))),
+        mainPanel(plotOutput("lovecountPlot"),
+                  br(), br(),
+                  htmlOutput("song")))),
   tabPanel(
-    "Lyrical Word Cloud",
-    titlePanel("Frequency of Certain Words in Mac Miller's Lyrics"),
+    "just a conversation [lyrical wordcloud]",
+    titlePanel("word frequency throughout mac miller's lyrics"),
     sidebarLayout(position = "left",
-        sidebarPanel(style = "background: #ffcba4",
-                     img(src = "orangemac.png", width = "80%",
+        sidebarPanel(p(em("Yeah, it ain't your money 'til you make it")),
+                     p(em("Otherwise, it's just a conversation")),
+                     p("– Conversation Pt. 1, Swimming"),
+                     style = "background: #ffcba4",
+                     img(src = "orangemac.png", width = "50%",
                          style = "display: block; margin-left: auto; margin-right: auto;"),
                      br(),
                      helpText("Hover over the words to see how many times each non-stop
@@ -110,9 +125,17 @@ server <- function(input, output) {
                   "swimming" = "swimming.mp3",
                   "circles" = "circles.mp3"))
   
+  songs <- reactive(switch(input$album,
+                           "the divine feminine" = "Planet God Damn (feat. Njomza) by Mac Miller",
+                           "k.i.d.s." = "The Spins by Mac Miller",
+                           "macadelic" = "macadelic.mp3",
+                           "faces" = "faces.mp3",
+                           "swimming" = "Self Care by Mac Miller",
+                           "circles" = "Good News by Mac Miller"))
+  
   output$lovecountPlot <- renderPlot({
     ggplot(lovecount_subset(), aes(x = song, love_count)) +
-      geom_col(fill = "#FFB6C1") +
+      geom_col(fill = "#D9C1BF") +
       theme_bw() +
       labs(title = input$album,
            subtitle = "",
@@ -124,9 +147,13 @@ server <- function(input, output) {
       coord_flip() +
       theme(text = element_text(family = "Inconsolata"),
             axis.title = element_text(size = 14),
-            axis.text.x = element_blank(),
+            axis.ticks.y = element_blank(),
             plot.title = element_text(family = "Royal Acid", size = 20, hjust = 0.5),
             plot.subtitle = element_text(hjust = 0.5))})
+  
+  output$song <- renderText({ 
+    paste("<b>PRESS THE PLAY BUTTON TO LISTEN TO</b>", songs())
+  })
   
   # music player, need to figure out how to not make the music players duplicate
   observeEvent(input$album, {
