@@ -42,7 +42,27 @@ word_count <- count(wordcloud_data, word)
 
 
 ui <- navbarPage(
-  tags$head(tags$style("label{font-family: Inconsolata;}")),
+  tags$head(
+    tags$style(HTML("
+                    @import url('https:////fonts.googleapis.com/css?family=Righteous');
+                    body{
+                    background-color: white;
+                    color: #8C6E68;
+                    }
+                    h2 {
+                    font-family: 'Righteous';
+                    }
+                    .shiny-input-container {
+                    color: #474747;
+                    }
+                    .navbar-default {
+    background-color: #D9C1BF !important;
+                    }
+                    .navbar-default:hover {
+    background-color: #BF9B8E !important;
+    color: yellow;}
+                    "))),
+  
   tabPanel(
     "Love Lyrics",
     titlePanel("LOVE in Mac Miller's Discography"),
@@ -115,5 +135,6 @@ server <- function(input, output) {
       c("orange", "#d0c816", "#f2905a", "#ff8668"), 
       nrow(word_count)), shape = "circle", size = 0.4)})
 }
+
 
 shinyApp(ui = ui, server = server)
