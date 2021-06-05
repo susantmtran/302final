@@ -43,29 +43,28 @@ word_count <- count(wordcloud_data, word)
 
 ui <- navbarPage(
   tags$head(
-    tags$style(HTML("
-                    @import url('https:////fonts.googleapis.com/css?family=Righteous');
-                    body{
-                    background-color: white;
-                    color: #8C6E68;
+    tags$style(HTML(
+      "@import url('https://fonts.googleapis.com/css?family=Lobster');
+      body{
+        background-color: white;
+        color: #8C6E68;
                     }
-                    h2 {
-                    font-family: 'Righteous';
+      h2 {
+        font-family: 'Lobster';
                     }
-                    .shiny-input-container {
-                    color: #474747;
+      .shiny-input-container {
+        color: #474747;
                     }
-                    .navbar-default {
-    background-color: #D9C1BF !important;
+      .navbar-default {
+        background-color: #D9C1BF !important;
                     }
-                    .navbar-default:hover {
-    background-color: #BF9B8E !important;
-    color: yellow;}
-                    "))),
+      .navbar-default:hover {
+        background-color: #BF9B8E !important;
+        color: yellow;}"))),
   
   tabPanel(
-    "Love Lyrics",
-    titlePanel("LOVE in Mac Miller's Discography"),
+    "I Think I'm in Love",
+    titlePanel(h2("Lyrics about Love", align = "center")),
     sidebarLayout(position = "right",
         sidebarPanel(img(src = "mac.jpeg", width = "60%",
                          style = "display: block; margin-left: auto; margin-right: auto;"),
