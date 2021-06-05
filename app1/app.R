@@ -22,11 +22,12 @@ love_counts <- macaroni %>%
 top_love <- love_counts %>%
   top_n(5, love_count)
 
-album <- list("The Divine Feminine" = "the divine feminine",
-              "Faces" = "faces", 
-              "Macadelic" = "macadelic", 
-              "Swimming" = "swimming",
-              "Circles" = "circles")
+album <- list("The Divine Feminine (2016)" = "the divine feminine",
+              "K.I.D.S. (2010)" = "k.i.d.s.",
+              "Macadelic (2012)" = "macadelic", 
+              "Faces (2014)" = "faces", 
+              "Swimming (2018)" = "swimming",
+              "Circles (2020)" = "circles")
 
 # second tab initial steps
 wordcloud_data <- macaroni %>%
@@ -44,13 +45,16 @@ word_count <- count(wordcloud_data, word)
 ui <- navbarPage(
   tags$head(
     tags$style(HTML(
-      "@import url('https://fonts.googleapis.com/css?family=Lobster');
+      "@import url('https://fonts.googleapis.com/css?family=Inconsolata');
       body{
         background-color: white;
         color: #8C6E68;
+        font-family: 'Inconsolata';
                     }
       h2 {
-        font-family: 'Lobster';
+        font-weight: bold;
+        position: relative;
+        left: 100px;
                     }
       .shiny-input-container {
         color: #474747;
@@ -64,7 +68,7 @@ ui <- navbarPage(
   
   tabPanel(
     "I Think I'm in Love",
-    titlePanel(h2("Lyrics about Love", align = "center")),
+    titlePanel("Lyrics about Love"),
     sidebarLayout(position = "right",
         sidebarPanel(img(src = "mac.jpeg", width = "60%",
                          style = "display: block; margin-left: auto; margin-right: auto;"),
@@ -92,8 +96,6 @@ ui <- navbarPage(
                   width = 7)))
   )
 
-tags$audio(src = "sound.mp3", type = "audio/mp3", autoplay = NA, controls = NA)
-
 server <- function(input, output) {
   
   lovecount_subset <- reactive({
@@ -102,8 +104,9 @@ server <- function(input, output) {
   
   music <- reactive(switch(input$album,
                   "the divine feminine" = "thedivinefeminine.mp3",
-                  "faces" = "faces.mp3",
+                  "k.i.d.s." = "kids.mp3",
                   "macadelic" = "macadelic.mp3",
+                  "faces" = "faces.mp3",
                   "swimming" = "swimming.mp3",
                   "circles" = "circles.mp3"))
   
@@ -111,14 +114,18 @@ server <- function(input, output) {
     ggplot(lovecount_subset(), aes(x = song, love_count)) +
       geom_col(fill = "#FFB6C1") +
       theme_bw() +
-      labs(x = NULL, y = "'Love' Count by Song") +
+      labs(title = input$album,
+           subtitle = "",
+           x = NULL,
+           y = "\n'love' count by song*",
+           caption = "\n*includes love, loved, lovely, lover, lovers, loves, lovin") +
       scale_x_discrete(expand = c(0,0.8)) +
       scale_y_continuous(expand = c(0,0)) +
       coord_flip() +
       theme(text = element_text(family = "Inconsolata"),
             axis.title = element_text(size = 14),
             axis.text.x = element_blank(),
-            plot.title = element_text(family = "Royal Acid", size = 10, hjust = 0.5),
+            plot.title = element_text(family = "Royal Acid", size = 20, hjust = 0.5),
             plot.subtitle = element_text(hjust = 0.5))})
   
   # music player, need to figure out how to not make the music players duplicate
