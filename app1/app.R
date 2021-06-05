@@ -55,12 +55,14 @@ ui <- navbarPage(
                      (or some variation of 'Love') is in his songs."),
                      selectInput("album", label = "Select album below", choices = album),
                      br(),
+                     textOutput("text"),
+                     br(),
                      "LYRICAL DATA PULLED FROM GENIUS"),
         mainPanel(plotOutput("lovecountPlot")))),
   tabPanel(
     "Lyrical Word Cloud",
-    titlePanel("Mac Miller's Word Cloud"),
-    sidebarLayout(position = "right",
+    titlePanel("Frequency of Certain Words in Mac Miller's Lyrics"),
+    sidebarLayout(position = "left",
         sidebarPanel(style = "background: #ffcba4",
                      img(src = "orangemac.png", width = "80%",
                          style = "display: block; margin-left: auto; margin-right: auto;"),
@@ -73,11 +75,20 @@ ui <- navbarPage(
                   width = 7)))
   )
 
+tags$audio(src = "sound.mp3", type = "audio/mp3", autoplay = NA, controls = NA)
+
 server <- function(input, output) {
   
   lovecount_subset <- reactive({
     req(input$album)
     filter(love_counts, album %in% input$album)})
+  
+  music <- reactive(switch(input$album,
+                  "the divine feminine" = "thedivinefeminine",
+                  "faces" = "faces.mp3",
+                  "macadelic" = "macadelic.mp3",
+                  "swimming" = "swimming.mp3",
+                  "circles" = "circles.mp3"))
   
   output$lovecountPlot <- renderPlot({
     ggplot(lovecount_subset(), aes(x = song, love_count)) +
@@ -92,6 +103,12 @@ server <- function(input, output) {
             axis.text.x = element_blank(),
             plot.title = element_text(family = "Royal Acid", size = 10, hjust = 0.5),
             plot.subtitle = element_text(hjust = 0.5))})
+  
+  # music player, need to figure out how to not make the songs duplicate
+  observeEvent(input$album, {
+    insertUI(selector = "#album",
+             where = "afterEnd",
+             ui = tags$audio(src = music(), type = "audio/mp3", controls = NA))})
   
   output$wordcloud <- renderWordcloud2({
     wordcloud2(word_count, color = rep_len(
