@@ -104,4 +104,4 @@ explain
 
 ## Interactive App
 
-insert link to shiny here
+Click the link [here](https://susantran.shinyapps.io/macmiller/) to open a Mac Miller inspired Shiny App.

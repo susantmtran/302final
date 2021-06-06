@@ -8,6 +8,7 @@ library(RColorBrewer)
 
 library(wordcloud2)
 library(markdown)
+library(shiny)
 
 # word-by-word data
 macaroni <- readRDS("data/processed/macaroni.rds") 
