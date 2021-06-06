@@ -75,7 +75,7 @@ ui <- navbarPage(
                      em("My angel, what do you want with me?"),
                      br(),
                      p("– Soulmate, The Divine Feminine"),
-                     img(src = "mac.jpeg", width = "60%",
+                     img(src = "mac.jpeg", width = "100%",
                          style = "display: block; margin-left: auto; margin-right: auto;"),
                      br(),
                      style = "background: #D9C1BF",
@@ -114,7 +114,8 @@ ui <- navbarPage(
                          style = "display: block; margin-left: auto; margin-right: auto;"),
                      br(),
                      "LYRICAL DATA PULLED FROM GENIUS USING JOSIAH PARRY'S GENIUSR PACKAGE."),
-        mainPanel(wordcloud2Output("wordcloud"),
+        mainPanel(br(), br(), br(), br(), br(),
+                  wordcloud2Output("wordcloud"),
                   width = 7)))
   )
 
@@ -169,8 +170,8 @@ server <- function(input, output) {
   
   output$wordcloud <- renderWordcloud2({
     wordcloud2(word_count, color = rep_len(
-      c("orange", "#d0c816", "#f2905a", "#ff8668"), 
-      nrow(word_count)), shape = "circle", size = 0.4)})
+      c("#8C6E68", "#BF9B8E", "gray", "#0D0D0D"), 
+      nrow(word_count)), shape = "circle", size = 0.45)})
 }
 
 
