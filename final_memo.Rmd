@@ -72,15 +72,15 @@ h1, h2, h3, h4, h5, h6 {
 
 ## Introduction
 
-(write intro maybe?)
+Our project memo will provide an overview of what concepts are conveyed by our visualizations and interactive app features. Overall, we focused on gaining insight into Mac Miller's song releases and the content of his lyrics.
 
 ## Visualizations
 
-This static bar graph "Number of Songs per Album" portrays that Mac Miller released six albums, with the first three albums he released (K.I.D.S., Macadelic, and Faces) having a greater number of songs than his most recent three albums (The Divine Feminine, Swimming, and Circles). Most notably, Faces had the most songs at 24, while The Divine Feminine had the least at 10.
+The static bar graph "Number of Songs per Album" portrays that Mac Miller released six albums, with the first three albums he released (K.I.D.S., Macadelic, and Faces) having a greater number of songs than his most recent three albums (The Divine Feminine, Swimming, and Circles). Most notably, Faces had the most songs at 24, while The Divine Feminine had the least at 10.
 
 The animated graphic "Song Releases by Year" illustrates the number of songs released from 2010 to 2020. The animation is effective in highlighting the general trend of releases over time, with a notable peak in 2014 followed by a sharp drop in 2016, corresponding to the earlier bar plot showing the number of songs per album over time. For instance, the album Faces which had the most songs was released in 2014, while The Divine Feminine within the fewest songs was released in 2016.
 
-The first lyric-by-lyric visualizations--- the two side-by-side bar plots of the top 10 most frequently used words--- emphasize the difference that the absence of stop words creates. The plot on the left shows that the stop-word "I" is the most frequently used word in his songs. The graph on the right that excludes stop words provides more interesting information regarding the content of Mac Miller's lyrics. It also highlights that "yeah" is his most common non-stop word by far, while the plot on the left conceals that insight due to the inclusion of stop words.
+The first lyric-by-lyric visualizations--- the two side-by-side bar plots of the top 10 most frequently used words--- emphasize the difference that the absence of stop words creates. The plot on the left illustrates that the stop-word "I" is the most frequently used word in his songs. The graph on the right that excludes stop words provides more interesting information regarding the content of Mac Miller's lyrics. It also highlights that "yeah" is his most common non-stop word by far, while the plot on the left conceals that insight due to the inclusion of stop words.
 
 The bar graph titled "Wearing Rose-Colored Glasses" visualizes the count of the most frequently used words within the theme of love across Mac Miller's discography, ordered from least to most commonly used, while the bar plot "Feeling Blue (Da Ba Dee...)" depicts the same but for words with a "sad" connotation. The former illustrates that the word "love" has a strong lead at 155 mentions, more than double of the second most frequent word "baby" which has 76 mentions. Meanwhile, the latter shows a close tie between the words "hate" and "break" at 31 and 30 mentions respectively. It is also evident that there is generally a greater count of "love" words than sad words.
 
@@ -90,4 +90,4 @@ The second tab titled "just a conversation [lyrical wordcloud]" contains a wordc
 
 ## Conclusion
 
-(conclusion?)
+In conclusion, we found that Mac Miller had notable variability in the pattern of his song releases and that he often sang about love and sadness as main themes, using swear words often. Overall, our work helped us learn more about and share with others the music of one of our favorite artists through the power of data visualization.
