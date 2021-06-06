@@ -78,9 +78,7 @@ ui <- navbarPage(
                      br(),
                      style = "background: #D9C1BF",
                      p("Using the dropdown menu below, select an album to visualize
-                       the frequency of love-related lyrics in each of the album's
-                       songs. You can also use the audio player to hear an instrumental
-                       version of a song on the selected album."),
+                       the frequency of love-related lyrics in each of the album's songs."),
                      br(),
                      selectInput("album", label = NULL, choices = album),
                      p("Note that the default option, The Divine Feminine, is
@@ -91,7 +89,9 @@ ui <- navbarPage(
                      "LYRICAL DATA PULLED FROM GENIUS"),
         mainPanel(plotOutput("lovecountPlot"),
                   br(), br(),
-                  htmlOutput("song")))),
+                  htmlOutput("song"),
+                  br(),
+                  uiOutput('my_audio')))),
   tabPanel(
     "just a conversation [lyrical wordcloud]",
     titlePanel("word frequency throughout mac miller's lyrics"),
@@ -152,19 +152,13 @@ server <- function(input, output) {
             plot.subtitle = element_text(hjust = 0.5))})
   
   output$song <- renderText({ 
-    paste("<b>PRESS THE PLAY BUTTON TO LISTEN TO</b>", songs())
+    paste("<b>CURIOUS ABOUT THE SELECTED ALBUM?</b>", "<br>",
+          "<em>NOW PLAYING:</em>", songs(), "(Instrumental)")
   })
-  
-  # music player, need to figure out how to not make the music players duplicate
+
   observeEvent(input$album, {
-    insertUI(selector = "#album",
-             where = "afterEnd",
-             ui = tags$audio(src = music(), type = "audio/mp3", controls = NA))},
-    )
-  
-#  eventReactive(input$album, {
-#    removeUI(
-#      selector = "#album")})
+    output$my_audio <- renderUI(tags$audio(src = music(), type = "audio/mp3",
+                                           autoplay = NA, controls = NA))})
   
   output$wordcloud <- renderWordcloud2({
     wordcloud2(word_count, color = rep_len(
