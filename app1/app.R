@@ -70,43 +70,50 @@ ui <- navbarPage(
     "are you my soulmate, my angel? [love-related lyrics]",
     titlePanel("lyrics about love"),
     sidebarLayout(position = "right",
-                  sidebarPanel(p(em("Yeah, are you my soulmate?")),
-                     p(em("My angel, what do you want with me?")),
+                  sidebarPanel(em("Yeah, are you my soulmate?"),
+                               br(),
+                     em("My angel, what do you want with me?"),
+                     br(),
                      p("– Soulmate, The Divine Feminine"),
                      img(src = "mac.jpeg", width = "60%",
                          style = "display: block; margin-left: auto; margin-right: auto;"),
                      br(),
                      style = "background: #D9C1BF",
-                     p("Using the dropdown menu below, select an album to visualize
-                       the frequency of love-related lyrics in each of the album's songs."),
-                     br(),
+                     p("Visualize the frequency of love-related lyrics in each album, song-by-song."),
+                     helpText("SELECT AN ALBUM:"),
                      selectInput("album", label = NULL, choices = album),
                      p("Note that the default option, The Divine Feminine, is
                        the most love-heavy album. Fans have theorized that he wrote
                        the album for his high school sweetheart and/or his then-girlfriend
                        Ariana Grande, who is featured on My Favorite Part."),
                      br(),
-                     "LYRICAL DATA PULLED FROM GENIUS"),
+                     "LYRICAL DATA PULLED FROM GENIUS USING JOSIAH PARRY'S GENIUSR PACKAGE."),
         mainPanel(plotOutput("lovecountPlot"),
                   br(), br(),
                   htmlOutput("song"),
                   br(),
-                  uiOutput('my_audio')))),
+                  uiOutput('audio')))),
   tabPanel(
     "just a conversation [lyrical wordcloud]",
     titlePanel("word frequency throughout mac miller's lyrics"),
     sidebarLayout(position = "left",
-        sidebarPanel(p(em("Yeah, it ain't your money 'til you make it")),
-                     p(em("Otherwise, it's just a conversation")),
-                     p("– Conversation Pt. 1, Swimming"),
-                     style = "background: #ffcba4",
-                     img(src = "orangemac.png", width = "50%",
+        sidebarPanel(em("Yeah, it ain't your money 'til you make it"),
+                     br(),
+                     em("Otherwise, it's just a conversation"),
+                     br(),
+                     "– Conversation Pt. 1, Swimming",
+                     style = "background: #D9C1BF",
+                     br(), br(),
+                     "Hover over the words to see how many times each non-stop
+                     appeared in Mac Miller's lyrics. For reference, stop words are
+                     commonly used phrases that search engines are trained to ignore,
+                     primarily because they add no substantive value to natural
+                     language processing. Examples include words such as a, is, are,
+                     the, and so forth.",
+                     img(src = "mac.png", width = "100%",
                          style = "display: block; margin-left: auto; margin-right: auto;"),
                      br(),
-                     helpText("Hover over the words to see how many times each non-stop
-                     word appeared in Mac Miller's song collection."),
-                     br(),
-                     "LYRICAL DATA PULLED FROM GENIUS"),
+                     "LYRICAL DATA PULLED FROM GENIUS USING JOSIAH PARRY'S GENIUSR PACKAGE."),
         mainPanel(wordcloud2Output("wordcloud"),
                   width = 7)))
   )
@@ -126,10 +133,10 @@ server <- function(input, output) {
                   "circles" = "circles.mp3"))
   
   songs <- reactive(switch(input$album,
-                           "the divine feminine" = "Planet God Damn (feat. Njomza) by Mac Miller",
+                           "the divine feminine" = "Dang! (feat. Anderson .Paak) by Mac Miller",
                            "k.i.d.s." = "The Spins by Mac Miller",
-                           "macadelic" = "macadelic.mp3",
-                           "faces" = "faces.mp3",
+                           "macadelic" = "Thoughts from a Balcony by Mac Miller",
+                           "faces" = "New Faces v2 (feat. Earl Sweatshirt, Da$h)",
                            "swimming" = "Self Care by Mac Miller",
                            "circles" = "Good News by Mac Miller"))
   
@@ -142,8 +149,8 @@ server <- function(input, output) {
            x = NULL,
            y = "\n'love' count by song*",
            caption = "\n*includes love, loved, lovely, lover, lovers, loves, lovin") +
-      scale_x_discrete(expand = c(0,0.8)) +
-      scale_y_continuous(expand = c(0,0)) +
+      scale_x_discrete(expand = c(0, 0.8)) +
+      scale_y_continuous(expand = c(0, 0)) +
       coord_flip() +
       theme(text = element_text(family = "Inconsolata"),
             axis.title = element_text(size = 14),
@@ -152,13 +159,13 @@ server <- function(input, output) {
             plot.subtitle = element_text(hjust = 0.5))})
   
   output$song <- renderText({ 
-    paste("<b>CURIOUS ABOUT THE SELECTED ALBUM?</b>", "<br>",
+    paste("<b>THINK YOU MIGHT LIKE THIS ALBUM? CHECK OUT THE SONG BELOW.</b>", "<br>",
           "<em>NOW PLAYING:</em>", songs(), "(Instrumental)")
   })
 
   observeEvent(input$album, {
-    output$my_audio <- renderUI(tags$audio(src = music(), type = "audio/mp3",
-                                           autoplay = NA, controls = NA))})
+    output$audio <- renderUI(tags$audio(src = music(), type = "audio/mp3",
+                                        controls = NA))})
   
   output$wordcloud <- renderWordcloud2({
     wordcloud2(word_count, color = rep_len(
