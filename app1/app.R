@@ -46,7 +46,7 @@ ui <- navbarPage(
   tags$head(
     tags$style(HTML(
       "@import url('https://fonts.googleapis.com/css?family=Inconsolata');
-      @import url(https://allfont.net/allfont.css?fonts=royal-acid);
+      @import url('https://allfont.net/allfont.css?fonts=royal-acid');
       body{
         background-color: white;
         color: #8C6E68;
@@ -157,7 +157,7 @@ server <- function(input, output) {
       theme(text = element_text(family = "Inconsolata"),
             axis.title = element_text(size = 14),
             axis.ticks.y = element_blank(),
-            plot.title = element_text(family = "Royal Acid", size = 20, hjust = 0.5),
+            plot.title = element_text(family = "Inconsolata", size = 20, hjust = 0.5),
             plot.subtitle = element_text(hjust = 0.5))})
   
   output$song <- renderText({ 
