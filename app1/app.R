@@ -46,6 +46,7 @@ ui <- navbarPage(
   tags$head(
     tags$style(HTML(
       "@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+      @import url(https://allfont.net/allfont.css?fonts=royal-acid);
       body{
         background-color: white;
         color: #8C6E68;
