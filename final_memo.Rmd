@@ -1,6 +1,6 @@
 ---
 title: "REMember"
-subtitle: "The Data Memo"
+subtitle: "The Final Memo"
 author: "Jamie Lee, Grace Park, Susan Tran"
 output: 
   prettydoc::html_pretty:
@@ -70,4 +70,24 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: thick double #D9C1BF; }
 ```
 
-What is the core concept(s) or insight(s) into the data that you believe the visualization communicates? Why did we pick that visualization? What is the purpose?
+## Introduction
+
+(write intro maybe?)
+
+## Visualizations
+
+This static bar graph "Number of Songs per Album" portrays that Mac Miller released six albums, with the first three albums he released (K.I.D.S., Macadelic, and Faces) having a greater number of songs than his most recent three albums (The Divine Feminine, Swimming, and Circles). Most notably, Faces had the most songs at 24, while The Divine Feminine had the least at 10.
+
+The animated graphic "Song Releases by Year" illustrates the number of songs released from 2010 to 2020. The animation is effective in highlighting the general trend of releases over time, with a notable peak in 2014 followed by a sharp drop in 2016, corresponding to the earlier bar plot showing the number of songs per album over time. For instance, the album Faces which had the most songs was released in 2014, while The Divine Feminine within the fewest songs was released in 2016.
+
+The first lyric-by-lyric visualizations--- the two side-by-side bar plots of the top 10 most frequently used words--- emphasize the difference that the absence of stop words creates. The plot on the left shows that the stop-word "I" is the most frequently used word in his songs. The graph on the right that excludes stop words provides more interesting information regarding the content of Mac Miller's lyrics. It also highlights that "yeah" is his most common non-stop word by far, while the plot on the left conceals that insight due to the inclusion of stop words.
+
+The bar graph titled "Wearing Rose-Colored Glasses" visualizes the count of the most frequently used words within the theme of love across Mac Miller's discography, ordered from least to most commonly used, while the bar plot "Feeling Blue (Da Ba Dee...)" depicts the same but for words with a "sad" connotation. The former illustrates that the word "love" has a strong lead at 155 mentions, more than double of the second most frequent word "baby" which has 76 mentions. Meanwhile, the latter shows a close tie between the words "hate" and "break" at 31 and 30 mentions respectively. It is also evident that there is generally a greater count of "love" words than sad words.
+
+The plot "Faces (2014)" takes a closer look at the album Faces, portraying word counts of each song in the album from highest to lowest, top to bottom. This visualization helps highlight that a majority of the songs have between 300 - 600 words, although some go lower or higher; there is a low of 0 for the instrumental piece "55" and a high of nearly 1,200 words for "Friends (ft. Schoolboy Q)." The interactive app has two tabs; the first tab being "are you my soulmate, my angel? [love-related lyrics]." Given that many of Mac Miller's songs are about love, this tab focuses on that theme, containing a dropdown option for users to select any of Mac Miller's 6 albums to see a bar plot of the mentions of the word "love" per song for the chosen album, including other related variations of the word. It also includes the audio of one song from the album, with the option to play, adjust volume, and download an mp3 file of the song.
+
+The second tab titled "just a conversation [lyrical wordcloud]" contains a wordcloud portraying the frequency of non-stop-words in Mac Miller's lyrics through size, with a bigger size corresponding to a greater number of occurrences of the word. The reader can hover over any word to see the exact number of times it appeared in his lyrics. At a glance, this visualization illustrates that a lot of swear words are among the most frequent, along with others such as "love," "time," feel," and "la."
+
+## Conclusion
+
+(conclusion?)
