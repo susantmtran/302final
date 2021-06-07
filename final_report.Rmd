@@ -78,30 +78,38 @@ Our project reflects a partial analysis of the song lyrics from late musical art
 
 ![](plots/songs_per_album.png)
 
-explain
-
 ![](plots/animation.gif)
-
-explain
 
 ## Lyric by Lyric
 
 ![](plots/most_common_words.png)
 
-explain
-
 ![](plots/love_common_words.png)
-
-explain
 
 ![](plots/sad_common_words.png)
 
-explain
-
 ![](plots/faces_album.png)
-
-explain
 
 ## Interactive App
 
 Click the link [[**here**]{.ul}](https://susantran.shinyapps.io/macmiller/) to open a Mac Miller inspired Shiny App.
+
+## Sources
+
+Mac Miller. *Circles*, Warner Records, 2020.
+
+Mac Miller. *Faces*, Self-released, 2014.
+
+Mac Miller. *K.I.D.S.*, Rostrum, 2010.
+
+Mac Miller. *Macadelic*, Rostrum, 2012.
+
+Mac Miller. *Swimming*, Warner Bros. Records, 2018.
+
+Mac Miller. *The Divine Feminine*, Warner Bros. Records, 2016.
+
+"Mac Miller." Wikipedia, Wikimedia Foundation, Inc., 27 May 2021, en.wikipedia.org/wiki/Mac_Miller.
+
+Parry, Josiah. "Genius," *Github*. 2019. [<https://github.com/JosiahParry/genius>](https://github.com/JosiahParry/genius){.uri}
+
+Veas, Cristobal. "How to Analyze Emotions and Words of the Lyrics From Your Favorite Music Artist." *Medium*, Towards Data Science, 25 Sept. 2020, towardsdatascience.com/how-to-analyze-emotions-and-words-of-the-lyrics-from-your-favorite-music-artist-bbca10411283.
