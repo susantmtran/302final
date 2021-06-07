@@ -33,6 +33,9 @@ a {
   color: #8C6E68 }
   a:hover, a:focus {
     color: #BF9B8E; }
+    
+b, strong {
+  color: #8C6E68 }
 
 code {
   font-weight: 550;
@@ -72,22 +75,46 @@ h1, h2, h3, h4, h5, h6 {
 
 ## Introduction
 
-Our project memo will provide an overview of what concepts are conveyed by our visualizations and interactive app features. Overall, we focused on gaining insight into Mac Miller's song releases and the content of his lyrics.
+Our project memo will provide an overview of what concepts are conveyed by our visualizations and interactive app features, as seen in our final report. Overall, we focused on gaining insight into Mac Miller's song releases and the content of his lyrics through thorough visualizations and analyses.
 
 ## Visualizations
 
-The static bar graph "Number of Songs per Album" portrays that Mac Miller released six albums, with the first three albums he released (K.I.D.S., Macadelic, and Faces) having a greater number of songs than his most recent three albums (The Divine Feminine, Swimming, and Circles). Most notably, Faces had the most songs at 24, while The Divine Feminine had the least at 10.
+We start our analysis by observing lyrical trends over time. The first plot is a static bar graph entitled **"Number of Songs per Album,"** which focuses on the six projects that we selected. The three oldest albums, K.I.D.S., Macadelic, and Faces, have a greater number of songs than The Divine Feminine, Swimming, and Circles (released posthumously), his three most recent albums. For reference, Mac Miller went from independent to signing with Warner Bros. Records in 2014, after the release of the Faces mixtape. Working with such a large and renowned record label likely led to some creative restrictions, which explains the decreased number of songs.
 
-The animated graphic "Song Releases by Year" illustrates the number of songs released from 2010 to 2020. The animation is effective in highlighting the general trend of releases over time, with a notable peak in 2014 followed by a sharp drop in 2016, corresponding to the earlier bar plot showing the number of songs per album over time. For instance, the album Faces which had the most songs was released in 2014, while The Divine Feminine within the fewest songs was released in 2016.
+The animated graphic **"Song Releases by Year"** illustrates the number of songs released from 2010 to 2020. While the data necessary to construct the first plot and this graphic are essentially the same, the animation is more effective at highlighting the general trend of releases over time. There is a notable peak in 2014 followed by a sharp drop in 2016, corresponding to the earlier bar plot showing the number of songs per album over time. For instance, the album Faces, which had the most songs, was released in 2014, while The Divine Feminine, with the fewest songs, was released in 2016.
 
-The first lyric-by-lyric visualizations--- the two side-by-side bar plots of the top 10 most frequently used words--- emphasize the difference that the absence of stop words creates. The plot on the left illustrates that the stop-word "I" is the most frequently used word in his songs. The graph on the right that excludes stop words provides more interesting information regarding the content of Mac Miller's lyrics. It also highlights that "yeah" is his most common non-stop word by far, while the plot on the left conceals that insight due to the inclusion of stop words.
+The first lyric-by-lyric visualizations---the two side-by-side bar plots of the **"Top 10 Most Frequently Used Words"**---emphasize the difference that the absence of stop words creates. The plot on the left illustrates that the stop word "I" is the most frequently used word in his songs. However, the same can be said for most other lyricists, given that pronouns are so common in our daily language and syntax. The bar plot on the right excludes stop words and provides more interesting information regarding the content of Mac Miller's lyrics. It also highlights that "yeah" is his most common non-stop word by far, while the plot on the left conceals that insight.
 
-The bar graph titled "Wearing Rose-Colored Glasses" visualizes the count of the most frequently used words within the theme of love across Mac Miller's discography, ordered from least to most commonly used, while the bar plot "Feeling Blue (Da Ba Dee...)" depicts the same but for words with a "sad" connotation. The former illustrates that the word "love" has a strong lead at 155 mentions, more than double of the second most frequent word "baby" which has 76 mentions. Meanwhile, the latter shows a close tie between the words "hate" and "break" at 31 and 30 mentions respectively. It is also evident that there is generally a greater count of "love" words than sad words.
+Next, the bar graph entitled **"Wearing Rose-Colored Glasses"** visualizes the count of the most frequently used words within the theme of love across Mac Miller's discography, ordered from least to most commonly used. Similarly, the bar plot **"Feeling Blue (Da Ba Dee...)"** depicts the same information but for words with a "sad" connotation instead. The former illustrates that the word "love" has a strong lead at 155 mentions, more than double of the second most frequent word "baby" which has 76 mentions. Meanwhile, the latter shows a close tie between the words "hate" and "break" at 31 and 30 mentions respectively. It is also evident that there is generally a greater count of "love" words than sad words, implying that Mac Miller most likely prefers romantic topics over more melancholic themes. Alternatively, romantic songs are palatable and therefore perform better on the charts, which is a factor that some artists account for when releasing projects.
 
-The plot "Faces (2014)" takes a closer look at the album Faces, portraying word counts of each song in the album from highest to lowest, top to bottom. This visualization helps highlight that a majority of the songs have between 300 - 600 words, although some go lower or higher; there is a low of 0 for the instrumental piece "55" and a high of nearly 1,200 words for "Friends (ft. Schoolboy Q)." The interactive app has two tabs; the first tab being "are you my soulmate, my angel? [love-related lyrics]." Given that many of Mac Miller's songs are about love, this tab focuses on that theme, containing a dropdown option for users to select any of Mac Miller's 6 albums to see a bar plot of the mentions of the word "love" per song for the chosen album, including other related variations of the word. It also includes the audio of one song from the album, with the option to play, adjust volume, and download an mp3 file of the song.
+The last plot, **"Faces (2014),"** takes a closer look at his last independently-released project. It portrays the word count for each song from highest to lowest, top to bottom. This visualization helps highlight that a majority of the songs have between 300-600 words, though that is not a strict cutoff. There is a low of 0 for the instrumental piece "55" and a high of nearly 1,200 words for "Friends (ft. ScHoolboy Q)". The latter features well-known hip hop artist and friend ScHoolboy Q, along with the classic components of rap such as content, flow, and delivery.
 
-The second tab titled "just a conversation [lyrical wordcloud]" contains a wordcloud portraying the frequency of non-stop-words in Mac Miller's lyrics through size, with a bigger size corresponding to a greater number of occurrences of the word. The reader can hover over any word to see the exact number of times it appeared in his lyrics. At a glance, this visualization illustrates that a lot of swear words are among the most frequent, along with others such as "love," "time," feel," and "la."
+The interactive app, hosted on the [shinyapps.io](https://susantran.shinyapps.io/macmiller/) platform, has two tabs. The first tab is **"are you my soulmate, my angel? [love-related lyrics],"** which focuses on the major theme of romance and love in Mac Miller's lyrics. It contains a dropdown option for users to select any of the six projects to see a bar plot of the mentions of the word "love" (and its variations) per song for the chosen album. It also includes the instrumental audio of one song from the album, with the option to play, adjust volume, and download an .mp3 file of the song.
+
+The second tab titled **"just a conversation [lyrical wordcloud]"** contains a wordcloud portraying the frequency of non-stop-words in Mac Miller's lyrics through size, with a bigger size corresponding to a greater number of occurrences of the word. The reader can hover over any word to see the exact number of times it appeared in his lyrics. At a glance, this visualization illustrates that a lot of expletives are among the most frequent, along with others such as "love," "time," feel," and "la."
 
 ## Conclusion
 
-In conclusion, we found that Mac Miller had notable variability in the pattern of his song releases and that he often sang about love and sadness as main themes, using swear words often. Overall, our work helped us learn more about and share with others the music of one of our favorite artists through the power of data visualization.
+Wrapping up our analysis, we found that Mac Miller had notable variability in the pattern of his song releases, whether it be the word count per song, songs per album, or in the words themselves. Thematically, many of his songs are about love, though there is a trend of more negative topics as well. Furthermore, most, if not all, of his projects contain a warning for explicit content to the expletives and overall subject matter.
+
+Overall, our work helped us learn more about the music of one of our favorite artists through the power of data visualization, all while sharing it with others (data scientists and hip hop enthusiasts alike).
+
+## Sources
+
+Mac Miller. *Circles*, Warner Records, 2020.
+
+Mac Miller. *Faces*, Self-released, 2014.
+
+Mac Miller. *K.I.D.S.*, Rostrum, 2010.
+
+Mac Miller. *Macadelic*, Rostrum, 2012.
+
+Mac Miller. *Swimming*, Warner Bros. Records, 2018.
+
+Mac Miller. *The Divine Feminine*, Warner Bros. Records, 2016.
+
+"Mac Miller." Wikipedia, Wikimedia Foundation, Inc., 27 May 2021, en.wikipedia.org/wiki/Mac_Miller.
+
+Parry, Josiah. "Genius," *Github*. 2019. <https://github.com/JosiahParry/genius>
+
+Veas, Cristobal. "How to Analyze Emotions and Words of the Lyrics From Your Favorite Music Artist." *Medium*, Towards Data Science, 25 Sept. 2020, towardsdatascience.com/how-to-analyze-emotions-and-words-of-the-lyrics-from-your-favorite-music-artist-bbca10411283.
