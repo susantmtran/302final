@@ -98,23 +98,3 @@ The second tab titled **"just a conversation [lyrical wordcloud]"** contains a w
 Wrapping up our analysis, we found that Mac Miller had notable variability in the pattern of his song releases, whether it be the word count per song, songs per album, or in the words themselves. Thematically, many of his songs are about love, though there is a trend of more negative topics as well. Furthermore, most, if not all, of his projects contain a warning for explicit content to the expletives and overall subject matter.
 
 Overall, our work helped us learn more about the music of one of our favorite artists through the power of data visualization, all while sharing it with others (data scientists and hip hop enthusiasts alike).
-
-## Sources
-
-Mac Miller. *Circles*, Warner Records, 2020.
-
-Mac Miller. *Faces*, Self-released, 2014.
-
-Mac Miller. *K.I.D.S.*, Rostrum, 2010.
-
-Mac Miller. *Macadelic*, Rostrum, 2012.
-
-Mac Miller. *Swimming*, Warner Bros. Records, 2018.
-
-Mac Miller. *The Divine Feminine*, Warner Bros. Records, 2016.
-
-"Mac Miller." Wikipedia, Wikimedia Foundation, Inc., 27 May 2021, en.wikipedia.org/wiki/Mac_Miller.
-
-Parry, Josiah. "Genius," *Github*. 2019. <https://github.com/JosiahParry/genius>
-
-Veas, Cristobal. "How to Analyze Emotions and Words of the Lyrics From Your Favorite Music Artist." *Medium*, Towards Data Science, 25 Sept. 2020, towardsdatascience.com/how-to-analyze-emotions-and-words-of-the-lyrics-from-your-favorite-music-artist-bbca10411283.
