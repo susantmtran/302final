@@ -5,9 +5,9 @@ account: susantran
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 4233455
-bundleId: 4682427
+bundleId: 4688912
 url: https://susantran.shinyapps.io/macmiller/
-when: 1622945176.40672
-lastSyncTime: 1622945176.40675
+when: 1623088937.57101
+lastSyncTime: 1623088937.57104
 asMultiple: FALSE
 asStatic: FALSE
