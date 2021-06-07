@@ -139,7 +139,7 @@ server <- function(input, output) {
                            "the divine feminine" = "Dang! (feat. Anderson .Paak) by Mac Miller",
                            "k.i.d.s." = "The Spins by Mac Miller",
                            "macadelic" = "Thoughts from a Balcony by Mac Miller",
-                           "faces" = "New Faces v2 (feat. Earl Sweatshirt, Da$h)",
+                           "faces" = "Happy Birthday by Mac Miller",
                            "swimming" = "Self Care by Mac Miller",
                            "circles" = "Good News by Mac Miller"))
   
@@ -163,7 +163,7 @@ server <- function(input, output) {
   
   output$song <- renderText({ 
     paste("<b>THINK YOU MIGHT LIKE THIS ALBUM? CHECK OUT THE SONG BELOW.</b>", "<br>",
-          "<em>NOW PLAYING:</em>", songs(), "(Instrumental)")
+          "<em>NOW PLAYING:</em>", songs())
   })
 
   observeEvent(input$album, {
