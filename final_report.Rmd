@@ -92,7 +92,7 @@ Our project reflects a partial analysis of the song lyrics from late musical art
 
 ## Interactive App
 
-Click the link [[**here**]{.ul}](https://susantran.shinyapps.io/macmiller/) to open a Mac Miller inspired Shiny App.
+Click the link [[**here**]{.ul}](https://susantran.shinyapps.io/macmiller/) to open the Mac Miller inspired Shiny App.
 
 ## Sources
 
@@ -110,6 +110,6 @@ Mac Miller. *The Divine Feminine*, Warner Bros. Records, 2016.
 
 "Mac Miller." Wikipedia, Wikimedia Foundation, Inc., 27 May 2021, en.wikipedia.org/wiki/Mac_Miller.
 
-Parry, Josiah. "Genius," *Github*. 2019. [<https://github.com/JosiahParry/genius>](https://github.com/JosiahParry/genius){.uri}
+Parry, Josiah. "Genius," *Github*. 2019. [\<https://github.com/JosiahParry/genius\>](https://github.com/JosiahParry/genius){.uri}
 
 Veas, Cristobal. "How to Analyze Emotions and Words of the Lyrics From Your Favorite Music Artist." *Medium*, Towards Data Science, 25 Sept. 2020, towardsdatascience.com/how-to-analyze-emotions-and-words-of-the-lyrics-from-your-favorite-music-artist-bbca10411283.
